@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swing CR 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="contenedor">
+      <header class="encabezado-formulario">
+        <a href="index.html">&laquo; Volver al Programa</a>
+        <h1>Registrar Nuevo Evento</h1>
+      </header>
+
+      <form id="formulario-registro" class="formulario">
+        <fieldset class="formulario__seccion">
+          <legend>Paso 1: Elige el momento</legend>
+          <div class="formulario__grupo">
+            <label for="dia">Día del festival:</label>
+            <select id="dia" name="dia" required>
+              <option value="">-- Selecciona un día --</option>
+              <option value="Viernes">Viernes</option>
+              <option value="Sábado">Sábado</option>
+              <option value="Domingo">Domingo</option>
+            </select>
+          </div>
+          <div class="formulario__grupo">
+            <label for="hora">Hora:</label>
+            <select id="hora" name="hora" required>
+              <option value="">-- Selecciona una hora --</option>
+              <option value="10:00">10:00</option>
+              <option value="11:00">11:00</option>
+              <option value="12:00">12:00</option>
+              <option value="13:00">13:00</option>
+              <option value="16:00">16:00</option>
+              <option value="17:00">17:00</option>
+              <option value="18:00">18:00</option>
+              <option value="19:00">19:00</option>
+              <option value="20:00">20:00</option>
+              <option value="21:00">21:00</option>
+              <option value="22:00">22:00</option>
+              <option value="23:00">23:00</option>
+            </select>
+          </div>
+        </fieldset>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
