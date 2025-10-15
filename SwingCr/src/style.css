@@ -1,3 +1,53 @@
+body {
+  font-family: "Lato", sans-serif;
+  color: #2c2c2c;
+  background-color: #fdf5e6;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2 {
+  font-family: "Playfair Display", serif;
+  color: #800020;
+}
+
+.contenedor {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+header {
+  text-align: center;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #ddcdbe;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none; /* Quita el subrayado del enlace */
+  border: none;
+  transition: transform 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background-color: #800020; /* Color burdeos */
+  color: #ffffff; /* Texto blanco */
+}
+
 .seccion-programa {
   margin-top: 32px;
 }
