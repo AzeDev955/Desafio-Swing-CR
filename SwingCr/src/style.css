@@ -34,7 +34,7 @@ header {
   font-weight: 700;
   cursor: pointer;
   text-align: center;
-  text-decoration: none; /* Quita el subrayado del enlace */
+  text-decoration: none;
   border: none;
   transition: transform 0.2s;
 }
@@ -44,8 +44,8 @@ header {
 }
 
 .btn-primary {
-  background-color: #800020; /* Color burdeos */
-  color: #ffffff; /* Texto blanco */
+  background-color: #800020;
+  color: #ffffff;
 }
 
 .seccion-programa {
