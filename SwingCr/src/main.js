@@ -1,5 +1,31 @@
 import "./style.css";
 
+class Evento {
+  constructor(dia, hora, ubicacion) {
+    this.dia = dia;
+    this.hora = hora;
+    this.ubicacion = ubicacion;
+  }
+}
+
+class Clase extends Evento {
+  constructor(dia, hora, ubicacion, estilo, nivel, profesor) {
+    super(dia, hora, ubicacion);
+    this.estilo = estilo;
+    this.nivel = nivel;
+    this.profesor = profesor;
+  }
+}
+
+class Actividad extends Evento {
+  constructor(dia, hora, ubicacion, tipo, banda, descripcion) {
+    super(dia, hora, ubicacion);
+    this.tipo = tipo;
+    this.banda = banda;
+    this.descripcion = descripcion;
+  }
+}
+
 const formulario = document.getElementById("formulario-registro");
 const seleccionActividad = document.getElementById("tipo-evento");
 const campoClase = document.getElementById("campos-clase");
