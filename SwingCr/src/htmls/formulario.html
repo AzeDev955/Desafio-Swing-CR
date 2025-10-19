@@ -49,15 +49,17 @@
           </div>
         </fieldset>
 
-        <fieldset class="formulario__seccion">
-          <legend>Paso 2: Selecciona una ubicación disponible</legend>
-          <div id="contenedor-ubicaciones" class="formulario__grupo">
-            <p>
-             <!-- Rellenar con JS-->
-            </p>
-            </div>
-        </fieldset>
 
+        <fieldset class="formulario__seccion">
+          <legend>Paso 2: Detalla el evento</legend>
+          <div class="formulario__grupo">
+            <label for="tipo-evento">Tipo de evento:</label>
+            <select id="tipo-evento" name="tipo-evento" required>
+              <option value="">-- Selecciona el tipo --</option>
+              <option value="Clase">Clase</option>
+              <option value="Actividad">Actividad</option>
+            </select>
+          </div>
 
         <div id="campos-clase" class="campos-dinamicos oculto">
             <div class="formulario__grupo">
@@ -97,7 +99,7 @@
                 <option value="Mix & Match">Mix & Match</option>
               </select>
             </div>
-            <div class="formulario__grupo">
+            <div class="formulario__grupo oculto" id="grupo-banda">
               <label for="actividad-banda">Banda:</label>
               <input
                 type="text"
@@ -116,6 +118,15 @@
               ></textarea>
             </div>
           </div>
+        </fieldset>
+
+        <fieldset class="formulario__seccion">
+          <legend>Paso 3: Selecciona una ubicación disponible</legend>
+          <div id="contenedor-ubicaciones" class="formulario__grupo">
+            <p>
+             <!-- Rellenar con JS-->
+            </p>
+            </div>
         </fieldset>
           <div class="formulario__acciones">
           <button type="submit" class="btn btn-primary">Guardar Evento</button>
