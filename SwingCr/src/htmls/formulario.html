@@ -48,6 +48,76 @@
             </select>
           </div>
         </fieldset>
-    <script type="module" src="src/main.js"></script>
+
+        <fieldset class="formulario__seccion">
+          <legend>Paso 2: Selecciona una ubicación disponible</legend>
+          <div id="contenedor-ubicaciones" class="formulario__grupo">
+            <p>
+             <!-- Rellenar con JS-->
+            </p>
+            </div>
+        </fieldset>
+
+
+        <div id="campos-clase" class="campos-dinamicos oculto">
+            <div class="formulario__grupo">
+              <label for="clase-estilo">Estilo:</label>
+              <select id="clase-estilo" name="clase-estilo">
+                <option value="Lindy Hop">Lindy Hop</option>
+                <option value="Shag">Shag</option>
+                <option value="Solo Jazz">Solo Jazz</option>
+              </select>
+            </div>
+            <div class="formulario__grupo">
+              <label for="clase-nivel">Nivel:</label>
+              <select id="clase-nivel" name="clase-nivel">
+                <option value="Básico">Básico</moption>
+                <option value="Intermedio">Intermedio</option>
+                <option value="Avanzado">Avanzado</option>
+              </select>
+            </div>
+            <div class="formulario__grupo">
+              <label for="clase-profesores">Profesor/es:</label>
+              <input
+                type="text"
+                id="clase-profesores"
+                name="clase-profesores"
+                placeholder="Introduce el nombre"
+              />
+            </div>
+          </div>
+
+          <div id="campos-actividad" class="campos-dinamicos oculto">
+            <div class="formulario__grupo">
+              <label for="actividad-tipo">Tipo de actividad:</label>
+              <select id="actividad-tipo" name="actividad-tipo">
+                <option value="Taster">Taster</option>
+                <option value="Social">Social</option>
+                <option value="Concierto">Concierto</option>
+                <option value="Mix & Match">Mix & Match</option>
+              </select>
+            </div>
+            <div class="formulario__grupo">
+              <label for="actividad-banda">Banda:</label>
+              <input
+                type="text"
+                id="actividad-banda"
+                name="actividad-banda"
+                placeholder="Nombre de la banda"
+              />
+            </div>
+            <div class="formulario__grupo">
+              <label for="actividad-descripcion">Descripción:</label>
+              <textarea
+                id="actividad-descripcion"
+                name="actividad-descripcion"
+                rows="3"
+                placeholder="Añade informacion relevante"
+              ></textarea>
+            </div>
+          </div>
+        </fieldset>
+
+    <script type="module" src="/SwingCr/src/main.js"></script>
   </body>
 </html>
