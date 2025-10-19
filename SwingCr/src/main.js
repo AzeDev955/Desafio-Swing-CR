@@ -1,5 +1,6 @@
 import "./style.css";
 
+const formulario = document.getElementById("formulario-registro");
 const seleccionActividad = document.getElementById("tipo-evento");
 const campoClase = document.getElementById("campos-clase");
 const campoActividades = document.getElementById("campos-actividad");
@@ -31,5 +32,30 @@ seleccionBanda.addEventListener("change", () => {
     campoBanda.classList.remove("oculto");
   } else {
     campoBanda.classList.add("oculto");
+  }
+});
+
+formulario.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const horaOption = document.getElementById("hora");
+  const hora = horaOption.value;
+
+  const diaOption = document.getElementById("dia");
+  const dia = diaOption.value;
+
+  const actividad = seleccionActividad.value;
+
+  switch (actividad) {
+    case "Clase":
+      const estiloOption = document.getElementById("clase-estilo");
+      const nivelOption = document.getElementById("clase-nivel");
+      const profesorInput = document.getElementById("clase-profesores");
+
+      const profesor = profesorInput.value;
+      const nivel = nivelOption.value;
+      const estilo = estiloOption.value;
+      break;
+    case "Actividad":
+      break;
   }
 });
