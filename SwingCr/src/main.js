@@ -56,6 +56,18 @@ formulario.addEventListener("submit", (event) => {
       const estilo = estiloOption.value;
       break;
     case "Actividad":
+      const tipoOption = document.getElementById("actividad-tipo");
+      const tipo = tipoOption.value;
+
+      let banda = "";
+      if (tipo === "Concierto") {
+        const bandaInput = document.getElementById("actividad-banda");
+        banda = bandaInput.value;
+      }
+
+      const descripcionInput = document.getElementById("actividad-descripcion");
+      const descripcion = descripcionInput.value;
+
       break;
   }
 });
