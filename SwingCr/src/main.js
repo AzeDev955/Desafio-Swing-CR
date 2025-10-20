@@ -90,6 +90,13 @@ soloClases.forEach((clase) => {
   let tituloTarjeta = document.createElement("div");
   tituloTarjeta.classList.add("tarjeta-evento__titulo");
   tituloTarjeta.textContent = clase.estilo;
+
+  let ubicacionTarjeta = document.createElement("div");
+  ubicacionTarjeta.classList.add("tarjeta-evento__ubicacion");
+  ubicacionTarjeta.textContent = clase.ubicacion;
+
+  tarjeta.appendChild(tituloTarjeta);
+  tarjeta.appendChild(ubicacionTarjeta);
 });
 
 const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
