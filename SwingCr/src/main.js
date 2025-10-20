@@ -72,7 +72,16 @@ const cargarEventos = () => {
 };
 
 const listaEventos = cargarEventos();
+const soloClases = [];
+const soloActividades = [];
 
+listaEventos.forEach((evento) => {
+  if (evento instanceof Clase) {
+    soloClases.push(evento);
+  } else {
+    soloActividades.push(evento);
+  }
+});
 const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
 const salasActividades = ["Antiguo casino", "Parque", "Prado"];
 
