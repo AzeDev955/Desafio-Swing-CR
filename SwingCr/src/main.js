@@ -33,6 +33,10 @@ const formulario = document.getElementById("formulario-registro");
 const seleccionActividad = document.getElementById("tipo-evento");
 const campoClase = document.getElementById("campos-clase");
 const campoActividades = document.getElementById("campos-actividad");
+const campoUbicacionesClases = document.getElementById("ubicaciones-clases");
+const campoUbicacionesActividades = document.getElementById(
+  "ubicaciones-actividades"
+);
 
 seleccionActividad.addEventListener("change", () => {
   const valor = seleccionActividad.value;
@@ -40,15 +44,21 @@ seleccionActividad.addEventListener("change", () => {
     case "Clase":
       campoClase.classList.remove("oculto");
       campoActividades.classList.add("oculto");
+      campoUbicacionesClases.classList.remove("oculto");
+      campoUbicacionesActividades.classList.add("oculto");
       break;
     case "Actividad":
       campoClase.classList.add("oculto");
       campoActividades.classList.remove("oculto");
+      campoUbicacionesClases.classList.remove("oculto");
+      campoUbicacionesActividades.classList.remove("oculto");
       break;
 
     default:
       campoClase.classList.add("oculto");
       campoActividades.classList.add("oculto");
+      campoUbicacionesClases.classList.add("oculto");
+      campoUbicacionesActividades.classList.add("oculto");
       break;
   }
 });
