@@ -26,6 +26,9 @@ class Actividad extends Evento {
   }
 }
 
+const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
+const salasActividades = ["Antiguo casino", "Parque", "Prado"];
+
 const formulario = document.getElementById("formulario-registro");
 const seleccionActividad = document.getElementById("tipo-evento");
 const campoClase = document.getElementById("campos-clase");
@@ -80,6 +83,8 @@ formulario.addEventListener("submit", (event) => {
       const profesor = profesorInput.value;
       const nivel = nivelOption.value;
       const estilo = estiloOption.value;
+
+      const clase = new Clase(dia, hora);
       break;
     case "Actividad":
       const tipoOption = document.getElementById("actividad-tipo");
