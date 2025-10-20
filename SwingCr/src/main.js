@@ -1,4 +1,8 @@
 import "./style.css";
+import "./modelo/Actividad";
+import "./modelo/Clase";
+import "./modelo/Evento";
+
 const cargarEventos = () => {
   const eventosGuardados = localStorage.getItem(STORAGE);
   if (eventosGuardados) {
@@ -10,31 +14,6 @@ const cargarEventos = () => {
 const STORAGE = "eventosCR";
 
 const listaEventos = cargarEventos();
-class Evento {
-  constructor(dia, hora, ubicacion) {
-    this.dia = dia;
-    this.hora = hora;
-    this.ubicacion = ubicacion;
-  }
-}
-
-class Clase extends Evento {
-  constructor(dia, hora, ubicacion, estilo, nivel, profesor) {
-    super(dia, hora, ubicacion);
-    this.estilo = estilo;
-    this.nivel = nivel;
-    this.profesor = profesor;
-  }
-}
-
-class Actividad extends Evento {
-  constructor(dia, hora, ubicacion, tipo, banda, descripcion) {
-    super(dia, hora, ubicacion);
-    this.tipo = tipo;
-    this.banda = banda;
-    this.descripcion = descripcion;
-  }
-}
 
 const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
 const salasActividades = ["Antiguo casino", "Parque", "Prado"];
