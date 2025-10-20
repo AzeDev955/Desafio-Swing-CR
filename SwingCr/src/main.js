@@ -34,10 +34,17 @@ const horasActividades = [
 ];
 
 const tablaClases = document.getElementById("tabla-clases");
-const cuerpoClase = tablaClases.querySelector("tbody");
+let cuerpoClase;
+if (tablaClases) {
+  cuerpoClase = tablaClases.querySelector("tbody");
+}
 
 const tablaActividades = document.getElementById("tabla-actividades");
-const cuerpoActividades = tablaActividades.querySelector("tbody");
+
+let cuerpoActividades;
+if (tablaActividades) {
+  cuerpoActividades = tablaActividades.querySelector("tbody");
+}
 
 horasClase.forEach((hora) => {
   let nuevaFila = document.createElement("tr");
@@ -97,6 +104,28 @@ soloClases.forEach((clase) => {
 
   tarjeta.appendChild(tituloTarjeta);
   tarjeta.appendChild(ubicacionTarjeta);
+
+  const filaCorrecta = cuerpoClase.querySelector(
+    `tr th:first-child[textContent='${clase.hora}']`
+  ); //con ayuda de nuestro amigo confiable
+
+  if (filaCorrecta) {
+    let columna;
+    switch (clase.dia) {
+      case "Viernes":
+        columna = 0;
+        break;
+      case "Sabado":
+        columna = 1;
+        break;
+      case "Domingo":
+        columna = 2;
+        break;
+    }
+    const celdas = filaCorrecta.querySelectorAll("td");
+    const celdaUbicacion = celdas[columna];
+    celdaUbicacion.appendChild(tarjeta);
+  }
 });
 
 const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
