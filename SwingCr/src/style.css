@@ -187,3 +187,14 @@ header {
 .oculto {
   display: none;
 }
+
+.radio-fila {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.radio-fila input[type="radio"] {
+  margin: 0;
+  flex-shrink: 0;
+  margin-top: -5px;
+}
