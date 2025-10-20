@@ -1,7 +1,6 @@
 import "./style.css";
-import "./modelo/Actividad";
-import "./modelo/Clase";
-import "./modelo/Evento";
+import { Actividad } from "./modelo/Actividad.js";
+import { Clase } from "./modelo/Clase.js";
 
 const cargarEventos = () => {
   const eventosGuardados = localStorage.getItem(STORAGE);
