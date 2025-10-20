@@ -35,6 +35,17 @@ const horasActividades = [
 const formulario = document.getElementById("formulario-registro");
 const tablaClases = document.getElementById("tabla-clases");
 
+const cargarEventos = () => {
+  const eventosGuardados = localStorage.getItem(STORAGE);
+  if (eventosGuardados) {
+    return JSON.parse(eventosGuardados);
+  } else {
+    return [];
+  }
+};
+
+const listaEventos = cargarEventos();
+
 if (tablaClases) {
   let cuerpoClase;
   if (tablaClases) {
@@ -71,27 +82,16 @@ if (tablaClases) {
     }
     cuerpoActividades.appendChild(nuevaFila);
   });
-  const cargarEventos = () => {
-    const eventosGuardados = localStorage.getItem(STORAGE);
-    if (eventosGuardados) {
-      return JSON.parse(eventosGuardados);
-    } else {
-      return [];
-    }
-  };
-
-  const listaEventos = cargarEventos();
   const soloClases = [];
   const soloActividades = [];
 
   listaEventos.forEach((evento) => {
-    if (evento instanceof Clase) {
+    if (evento.profesor) {
       soloClases.push(evento);
     } else {
       soloActividades.push(evento);
     }
   });
-
   soloClases.forEach((clase) => {
     let tarjeta = document.createElement("div");
     tarjeta.classList.add("tarjeta-evento");
@@ -117,7 +117,7 @@ if (tablaClases) {
         case "Viernes":
           columna = 0;
           break;
-        case "Sabado":
+        case "Sábado":
           columna = 1;
           break;
         case "Domingo":
