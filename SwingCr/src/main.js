@@ -1,5 +1,15 @@
 import "./style.css";
+const cargarEventos = () => {
+  const eventosGuardados = localStorage.getItem(STORAGE);
+  if (eventosGuardados) {
+    return JSON.parse(eventosGuardados);
+  } else {
+    return [];
+  }
+};
+const STORAGE = "eventosCR";
 
+const listaEventos = cargarEventos();
 class Evento {
   constructor(dia, hora, ubicacion) {
     this.dia = dia;
@@ -82,8 +92,15 @@ formulario.addEventListener("submit", (event) => {
   const diaOption = document.getElementById("dia");
   const dia = diaOption.value;
 
+  const ubicacionOption = document.querySelector(
+    "input[name='ubicacion']:checked"
+  );
+  let ubicacion = "";
+  if (ubicacionOption) {
+    ubicacion = ubicacionOption.value;
+  }
   const actividad = seleccionActividad.value;
-
+  let evento;
   switch (actividad) {
     case "Clase":
       const estiloOption = document.getElementById("clase-estilo");
@@ -94,7 +111,7 @@ formulario.addEventListener("submit", (event) => {
       const nivel = nivelOption.value;
       const estilo = estiloOption.value;
 
-      const clase = new Clase(dia, hora);
+      evento = new Clase(dia, hora, ubicacion, estilo, nivel, profesor);
       break;
     case "Actividad":
       const tipoOption = document.getElementById("actividad-tipo");
@@ -109,6 +126,10 @@ formulario.addEventListener("submit", (event) => {
       const descripcionInput = document.getElementById("actividad-descripcion");
       const descripcion = descripcionInput.value;
 
+      evento = new Actividad(dia, hora, ubicacion, tipo, banda, descripcion);
       break;
   }
+  listaEventos.push(evento);
+  const eventosJSON = JSON.stringify(listaEventos);
+  localStorage.setItem(STORAGE, eventosJSON);
 });
