@@ -82,6 +82,16 @@ listaEventos.forEach((evento) => {
     soloActividades.push(evento);
   }
 });
+
+soloClases.forEach((clase) => {
+  let tarjeta = document.createElement("div");
+  tarjeta.classList.add("tarjeta-evento");
+
+  let tituloTarjeta = document.createElement("div");
+  tituloTarjeta.classList.add("tarjeta-evento__titulo");
+  tituloTarjeta.textContent = clase.estilo;
+});
+
 const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
 const salasActividades = ["Antiguo casino", "Parque", "Prado"];
 
