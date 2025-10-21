@@ -110,4 +110,5 @@ formulario.addEventListener("submit", (event) => {
   listaEventos.push(evento);
   const eventosJSON = JSON.stringify(listaEventos);
   localStorage.setItem(STORAGE, eventosJSON);
+  formulario.reset();
 });
