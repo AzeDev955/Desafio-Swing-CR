@@ -194,6 +194,7 @@ else if (formulario) {
   function actualizarUbicacionesDisponibles() {
     const diaSeleccionado = diaSelect.value;
     const horaSeleccionada = horaSelect.value;
+
     if (diaSeleccionado && horaSeleccionada) {
       let arrayDiaHora = [];
       listaEventos.forEach((evento) => {
@@ -214,6 +215,10 @@ else if (formulario) {
           const fila = document.getElementById(sala);
           if (fila) {
             fila.classList.add("ocupado");
+            const inputFila = fila.querySelector("input[type='radio']");
+            if (inputFila) {
+              inputFila.disabled = true;
+            }
           }
         });
       }
