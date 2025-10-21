@@ -293,7 +293,7 @@ if (tablaClases) {
     const celdasActividad = document.querySelectorAll("#tabla-actividades td");
 
     tarjetas.forEach((tarjeta) => {
-      tarjeta.addEventListener("dragstart", manejoDragstart());
+      tarjeta.addEventListener("dragstart", manejoDragstart);
     });
 
     celdasClase.forEach((celda) => {
@@ -314,8 +314,9 @@ if (tablaClases) {
   let tarjetaDrag = null;
 
   const manejoDragstart = (e) => {
-    tarjetaDrag = this;
-    this.classList.add("dragging");
+    tarjetaDrag = e.currentTarget;
+    e.dataTransfer.setData("text/plain", tarjetaDrag.dataset.tipo);
+    tarjetaDrag.classList.add("dragging");
   };
 
   const manejoDragOver = (e) => {
@@ -328,6 +329,26 @@ if (tablaClases) {
 
   function manejoDragLeave(e) {
     this.classList.remove("dragging");
+  }
+
+  function manejoDropClase(e) {
+    e.preventDefault();
+    this.classList.remove("dragging");
+
+    const tipo = e.dataTransfer.getData("text/plain");
+    if (tipo !== "clase") {
+      return;
+    }
+  }
+
+  function manejoDropActividad(e) {
+    e.preventDefault();
+    this.classList.remove("dragging");
+
+    const tipo = e.dataTransfer.getData("text/plain");
+    if (tipo !== "actividad") {
+      return;
+    }
   }
 
   inicioDrag();
