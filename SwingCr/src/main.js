@@ -267,7 +267,7 @@ if (tablaClases) {
             evento.nivel == null &&
             ubicacionTarjeta === evento.ubicacion
         );
-        console.log("Evento encontrado:", eventoClick);
+
         if (eventoClick) {
           modalDia.textContent = eventoClick.dia;
           modalHora.textContent = eventoClick.hora;
@@ -412,6 +412,8 @@ if (tablaClases) {
       );
 
       inicioDrag();
+    } else {
+      return;
     }
   }
 
@@ -423,6 +425,27 @@ if (tablaClases) {
     if (tipo !== "actividad") {
       return;
     }
+    const newDia = celdaDestino.dataset.dia;
+    const newHora = celdaDestino.dataset.hora;
+    const oldDia = tarjetaArrastrada.dataset.dia;
+    const oldHora = tarjetaArrastrada.dataset.hora;
+    const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada);
+
+    tarjetaArrastrada.classList.remove("dragging");
+    celdaDestino.appendChild(tarjetaArrastrada);
+
+    tarjetaArrastrada.dataset.dia = newDia;
+    tarjetaArrastrada.dataset.hora = newHora;
+
+    actualizarEventoEnLista(
+      oldDia,
+      oldHora,
+      ubicacionARevisar,
+      newDia,
+      newHora
+    );
+
+    inicioDrag();
   }
 
   inicioDrag();
