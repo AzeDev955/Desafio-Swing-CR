@@ -180,7 +180,8 @@ if (tablaClases) {
 
   //Modal
   const modal = document.getElementById("modal-detalles");
-
+  const modalCerrarBtn = document.getElementById("modal-cerrar");
+  const modalTitulo = document.getElementById("modal-titulo");
   const modalDia = document.getElementById("modal-dia");
   const modalHora = document.getElementById("modal-hora");
   const modalUbicacion = document.getElementById("modal-ubicacion");
@@ -203,7 +204,9 @@ if (tablaClases) {
     const tarjetaClicada = event.target.closest(".tarjeta-evento");
   });
 
-  modalce;
+  modalCerrarBtn.addEventListener("click", () => {
+    modal.classList.add("oculto");
+  });
 }
 
 ///////////////////////////////////////////////////////////////////////
