@@ -191,11 +191,12 @@ else if (formulario) {
   const campoUbicacionesActividades = document.getElementById(
     "ubicaciones-actividades"
   );
-  function actualizarUbicacionesDisponibles() {
+  const marcarSalasOcupadas = () => {
     const diaSeleccionado = diaSelect.value;
     const horaSeleccionada = horaSelect.value;
+    const actividadSeleccionada = seleccionActividad.value;
 
-    if (diaSeleccionado && horaSeleccionada) {
+    if (diaSeleccionado && horaSeleccionada && seleccionActividad) {
       let arrayDiaHora = [];
       listaEventos.forEach((evento) => {
         let diaHoraUbicacion = [evento.dia, evento.hora, evento.ubicacion];
@@ -223,7 +224,7 @@ else if (formulario) {
         });
       }
     }
-  }
+  };
 
   seleccionActividad.addEventListener("change", () => {
     const valor = seleccionActividad.value;
