@@ -205,11 +205,11 @@ if (tablaClases) {
 
   cuerpoClase.addEventListener("click", (event) => {
     const tarjetaClicada = event.target.closest(".tarjeta-evento");
+
     let eventoClick;
     if (tarjetaClicada) {
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
-
       eventoClick = listaEventos.find(
         (evento) => evento.dia === dia && evento.hora === hora
       );
@@ -243,6 +243,19 @@ if (tablaClases) {
       );
 
       if (eventoClick) {
+        modalDia.textContent = eventoClick.dia;
+        modalHora.textContent = eventoClick.hora;
+        modalUbicacion.textContent = eventoClick.ubicacion;
+        modalTitulo.textContent = `Detalles de la Actividad: ${eventoClick.tipo}`;
+
+        modalTipo.textContent = eventoClick.tipo;
+        modalBanda.textContent = eventoClick.banda;
+        modalDescripcion.textContent = eventoClick.descripcion;
+
+        modalDetallesClase.style.display = "none";
+        modalDetallesActividad.style.display = "block";
+
+        modal.classList.remove("oculto");
       }
     }
   });
