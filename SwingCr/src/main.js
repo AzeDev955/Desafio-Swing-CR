@@ -213,7 +213,7 @@ else if (formulario) {
         salasOcupadas.forEach((sala) => {
           const fila = document.getElementById(sala);
           if (fila) {
-            fila.classList.add("oculto");
+            fila.classList.add("ocupado");
           }
         });
       }
