@@ -177,6 +177,33 @@ if (tablaClases) {
       celdaUbicacion.appendChild(tarjeta);
     }
   });
+
+  //Modal
+  const modal = document.getElementById("modal-detalles");
+
+  const modalDia = document.getElementById("modal-dia");
+  const modalHora = document.getElementById("modal-hora");
+  const modalUbicacion = document.getElementById("modal-ubicacion");
+  const modalEstilo = document.getElementById("modal-estilo");
+  const modalNivel = document.getElementById("modal-nivel");
+  const modalProfesor = document.getElementById("modal-profesor");
+  const modalTipo = document.getElementById("modal-tipo");
+  const modalBanda = document.getElementById("modal-banda");
+  const modalDescripcion = document.getElementById("modal-descripcion");
+  const modalDetallesClase = document.getElementById("modal-detalles-clase");
+  const modalDetallesActividad = document.getElementById(
+    "modal-detalles-actividad"
+  );
+
+  cuerpoClase.addEventListener("click", (event) => {
+    const tarjetaClicada = event.target.closest(".tarjeta-evento");
+  });
+
+  cuerpoActividades.addEventListener("click", (event) => {
+    const tarjetaClicada = event.target.closest(".tarjeta-evento");
+  });
+
+  modalce;
 }
 
 ///////////////////////////////////////////////////////////////////////
