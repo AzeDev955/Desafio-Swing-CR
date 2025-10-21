@@ -227,3 +227,13 @@ header {
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
+
+.modal-contenido {
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
