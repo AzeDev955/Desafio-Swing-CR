@@ -271,3 +271,7 @@ header {
 #modal-detalles-actividad {
   display: none;
 }
+
+.dragging {
+  cursor: grabbing;
+}
