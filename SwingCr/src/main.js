@@ -308,8 +308,11 @@ if (tablaClases) {
     );
 
     if (eventoIndex !== -1) {
-      listaEventos[eventoIndex].dia = newDia;
-      listaEventos[eventoIndex].hora = newHora;
+      listaEventos[eventoIndex] = {
+        ...listaEventos[eventoIndex], // Mantener todas las propiedades existentes, sacado del que te cuento porque no habia manera
+        dia: newDia,
+        hora: newHora,
+      };
 
       const eventosJSON = JSON.stringify(listaEventos);
       localStorage.setItem(STORAGE, eventosJSON);
@@ -401,6 +404,8 @@ if (tablaClases) {
         newDia,
         newHora
       );
+
+      inicioDrag();
     }
   }
 
