@@ -346,5 +346,7 @@ else if (formulario) {
     listaEventos.push(evento);
     const eventosJSON = JSON.stringify(listaEventos);
     localStorage.setItem(STORAGE, eventosJSON);
+    resetUbicaciones();
+    marcarSalasOcupadas();
   });
 }
