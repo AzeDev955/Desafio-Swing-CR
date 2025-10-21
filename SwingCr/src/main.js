@@ -173,8 +173,8 @@ if (tablaClases) {
       bandaTarjeta.classList.add("tarjeta-evento__banda");
       bandaTarjeta.textContent = `Banda: ${actividad.banda}`;
 
-      tarjeta.dataset.dia = clase.dia;
-      tarjeta.dataset.hora = clase.hora;
+      tarjeta.dataset.dia = actividad.dia;
+      tarjeta.dataset.hora = actividad.hora;
 
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);
@@ -205,15 +205,29 @@ if (tablaClases) {
 
   cuerpoClase.addEventListener("click", (event) => {
     const tarjetaClicada = event.target.closest(".tarjeta-evento");
+    let eventoClick;
     if (tarjetaClicada) {
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
 
-      const eventoClick = listaEventos.find(
+      eventoClick = listaEventos.find(
         (evento) => evento.dia === dia && evento.hora === hora
       );
 
       if (eventoClick) {
+        modalDia.textContent = eventoClick.dia;
+        modalHora.textContent = eventoClick.hora;
+        modalUbicacion.textContent = eventoClick.ubicacion;
+        modalTitulo.textContent = `Detalles de la Clase: ${eventoClick.estilo}`;
+
+        modalEstilo.textContent = eventoClick.estilo;
+        modalNivel.textContent = eventoClick.nivel;
+        modalProfesor.textContent = eventoClick.profesor;
+
+        modalDetallesClase.style.display = "block";
+        modalDetallesActividad.style.display = "none";
+
+        modal.classList.remove("oculto");
       }
     }
   });
