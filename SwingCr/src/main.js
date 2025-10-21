@@ -284,9 +284,56 @@ if (tablaClases) {
   modalCerrarBtn.addEventListener("click", () => {
     modal.classList.add("oculto");
   });
+
+  //Drag n drop///////////////////////////////////////////////////////////////////
+
+  const inicioDrag = () => {
+    const tarjetas = document.querySelectorAll(".tarjeta-evento");
+    const celdasClase = document.querySelectorAll("#tabla-clases td");
+    const celdasActividad = document.querySelectorAll("#tabla-actividades td");
+
+    tarjetas.forEach((tarjeta) => {
+      tarjeta.addEventListener("dragstart", manejoDragstart());
+    });
+
+    celdasClase.forEach((celda) => {
+      celda.addEventListener("dragover", manejoDragOver);
+      celda.addEventListener("drop", manejoDropClase);
+      celda.addEventListener("dragenter", manejoDragEnter);
+      celda.addEventListener("dragleave", manejoDragLeave);
+    });
+
+    celdasActividad.forEach((celda) => {
+      celda.addEventListener("dragover", manejoDragOver);
+      celda.addEventListener("drop", manejoDropActividad);
+      celda.addEventListener("dragenter", manejoDragEnter);
+      celda.addEventListener("dragleave", manejoDragLeave);
+    });
+  };
+
+  let tarjetaDrag = null;
+
+  const manejoDragstart = (e) => {
+    tarjetaDrag = this;
+    this.classList.add("dragging");
+  };
+
+  const manejoDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const manejoDragEnter = (e) => {
+    e.preventDefault();
+  };
+
+  function manejoDragLeave(e) {
+    this.classList.remove("dragging");
+  }
+
+  inicioDrag();
 }
 
-///////////////////////////////////////////////////////////////////////
+//formulario///////////////////////////////////////////////////////////////////////
 else if (formulario) {
   const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
   const salasActividades = ["Antiguo casino", "Parque", "Prado"];
