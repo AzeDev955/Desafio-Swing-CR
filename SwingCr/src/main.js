@@ -222,8 +222,20 @@ else if (formulario) {
   function actualizarUbicacionesDisponibles() {
     const diaSeleccionado = diaSelect.value;
     const horaSeleccionada = horaSelect.value;
-    const tipoSeleccionado = tipoEventoSelect.value;
+    let arrayDiaHora = [];
+    listaEventos.forEach((evento) => {
+      diaHora = [evento.dia, evento.hora];
+      arrayDiaHora.push(diaHora);
+    });
   }
+  diaSelect.addEventListener("change", () => {
+    actualizarUbicacionesDisponibles();
+  });
+
+  horaSelect.addEventListener("change", () => {
+    actualizarUbicacionesDisponibles();
+  });
+
   const seleccionBanda = document.getElementById("actividad-tipo");
   const campoBanda = document.getElementById("grupo-banda");
 
