@@ -191,6 +191,34 @@ else if (formulario) {
   const campoUbicacionesActividades = document.getElementById(
     "ubicaciones-actividades"
   );
+  function actualizarUbicacionesDisponibles() {
+    const diaSeleccionado = diaSelect.value;
+    const horaSeleccionada = horaSelect.value;
+    if (diaSeleccionado && horaSeleccionada) {
+      let arrayDiaHora = [];
+      listaEventos.forEach((evento) => {
+        let diaHoraUbicacion = [evento.dia, evento.hora, evento.ubicacion];
+        arrayDiaHora.push(diaHoraUbicacion);
+      });
+      let salasOcupadas = [];
+      arrayDiaHora.forEach((evento) => {
+        let diaEvento = evento[0];
+        let horaEvento = evento[1];
+        let ubicacionEvento = evento[2];
+        if (diaEvento == diaSeleccionado && horaEvento == horaSeleccionada) {
+          salasOcupadas.push(ubicacionEvento);
+        }
+      });
+      if (salasOcupadas.length > 0) {
+        salasOcupadas.forEach((sala) => {
+          const fila = document.getElementById(sala);
+          if (fila) {
+            fila.classList.add("oculto");
+          }
+        });
+      }
+    }
+  }
 
   seleccionActividad.addEventListener("change", () => {
     const valor = seleccionActividad.value;
@@ -200,12 +228,14 @@ else if (formulario) {
         campoActividades.classList.add("oculto");
         campoUbicacionesClases.classList.remove("oculto");
         campoUbicacionesActividades.classList.add("oculto");
+        actualizarUbicacionesDisponibles();
         break;
       case "Actividad":
         campoClase.classList.add("oculto");
         campoActividades.classList.remove("oculto");
         campoUbicacionesClases.classList.remove("oculto");
         campoUbicacionesActividades.classList.remove("oculto");
+        actualizarUbicacionesDisponibles();
         break;
 
       default:
@@ -218,30 +248,6 @@ else if (formulario) {
   });
   const diaSelect = document.getElementById("dia");
   const horaSelect = document.getElementById("hora");
-
-  function actualizarUbicacionesDisponibles() {
-    const diaSeleccionado = diaSelect.value;
-    const horaSeleccionada = horaSelect.value;
-    let arrayDiaHora = [];
-    listaEventos.forEach((evento) => {
-      diaHoraUbicacion = [evento.dia, evento.hora, evento.ubicacion];
-      arrayDiaHora.push(diaHoraUbicacion);
-    });
-    arrayDiaHora.forEach((evento) => {
-      let diaEvento = evento[0];
-      let horaEvento = evento[1];
-      let ubicacionEvento = evento[2];
-      if (diaEvento == diaSeleccionado && horaEvento == horaSeleccionada) {
-      }
-    });
-  }
-  diaSelect.addEventListener("change", () => {
-    actualizarUbicacionesDisponibles();
-  });
-
-  horaSelect.addEventListener("change", () => {
-    actualizarUbicacionesDisponibles();
-  });
 
   const seleccionBanda = document.getElementById("actividad-tipo");
   const campoBanda = document.getElementById("grupo-banda");
