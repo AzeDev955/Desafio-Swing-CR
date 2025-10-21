@@ -419,62 +419,60 @@ if (tablaClases) {
       return;
     }
   }
-
+  inicioDrag();
   function manejoDropActividad(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const celdaDestino = e.currentTarget;
-  const tarjetaArrastrada = tarjetaDrag;
+    const celdaDestino = e.currentTarget;
+    const tarjetaArrastrada = tarjetaDrag;
 
-  const tipo = e.dataTransfer.getData("text/plain");
-  if (tipo !== "actividad") {
-    return;
-  }
+    const tipo = e.dataTransfer.getData("text/plain");
+    if (tipo !== "actividad") {
+      return;
+    }
 
-  const newDia = celdaDestino.dataset.dia;
-  const newHora = celdaDestino.dataset.hora;
-  const oldDia = tarjetaArrastrada.dataset.dia;
-  const oldHora = tarjetaArrastrada.dataset.hora;
-  const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada);
-  const ubicacionARevisar = eventoTarjeta.ubicacion;
+    const newDia = celdaDestino.dataset.dia;
+    const newHora = celdaDestino.dataset.hora;
+    const oldDia = tarjetaArrastrada.dataset.dia;
+    const oldHora = tarjetaArrastrada.dataset.hora;
+    const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada);
+    const ubicacionARevisar = eventoTarjeta.ubicacion;
 
-  // ✅ SOLO verificar conflicto si es una SALA DE CLASE
-  let claseOcupada = false;
-  
-  if (salasClase.includes(ubicacionARevisar)) {
-    claseOcupada = listaEventos.some(
-      (evento) =>
-        evento.dia === newDia &&
-        evento.hora === newHora &&
-        evento.ubicacion === ubicacionARevisar 
-    );
-  }
-  
+    let claseOcupada = false;
 
-  if (!claseOcupada) {
-    tarjetaArrastrada.classList.remove("dragging");
-    celdaDestino.appendChild(tarjetaArrastrada);
+    if (salasClase.includes(ubicacionARevisar)) {
+      claseOcupada = listaEventos.some(
+        (evento) =>
+          evento.dia === newDia &&
+          evento.hora === newHora &&
+          evento.ubicacion === ubicacionARevisar
+      );
+    }
 
-    tarjetaArrastrada.dataset.dia = newDia;
-    tarjetaArrastrada.dataset.hora = newHora;
+    if (!claseOcupada) {
+      tarjetaArrastrada.classList.remove("dragging");
+      celdaDestino.appendChild(tarjetaArrastrada);
 
-    actualizarEventoEnLista(
-      oldDia,
-      oldHora,
-      ubicacionARevisar,
-      newDia,
-      newHora
-    );
+      tarjetaArrastrada.dataset.dia = newDia;
+      tarjetaArrastrada.dataset.hora = newHora;
 
-    inicioDrag();
-  } else {
-    return;
+      actualizarEventoEnLista(
+        oldDia,
+        oldHora,
+        ubicacionARevisar,
+        newDia,
+        newHora
+      );
+
+      inicioDrag();
+    } else {
+      return;
+    }
   }
 }
 
 //formulario///////////////////////////////////////////////////////////////////////
 if (formulario) {
-  
   const diaSelect = document.getElementById("dia");
   const horaSelect = document.getElementById("hora");
   const seleccionActividad = document.getElementById("tipo-evento");
