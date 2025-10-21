@@ -126,6 +126,10 @@ if (tablaClases) {
       nivelTarjeta.classList.add("tarjeta-evento__nivel");
       nivelTarjeta.textContent = clase.nivel;
 
+      //Datasets para encontrar el div
+      tarjeta.dataset.dia = clase.dia;
+      tarjeta.dataset.hora = clase.hora;
+
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);
       tarjeta.appendChild(nivelTarjeta);
@@ -169,6 +173,9 @@ if (tablaClases) {
       bandaTarjeta.classList.add("tarjeta-evento__banda");
       bandaTarjeta.textContent = `Banda: ${actividad.banda}`;
 
+      tarjeta.dataset.dia = clase.dia;
+      tarjeta.dataset.hora = clase.hora;
+
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);
       tarjeta.appendChild(bandaTarjeta);
@@ -198,10 +205,32 @@ if (tablaClases) {
 
   cuerpoClase.addEventListener("click", (event) => {
     const tarjetaClicada = event.target.closest(".tarjeta-evento");
+    if (tarjetaClicada) {
+      const dia = tarjetaClicada.dataset.dia;
+      const hora = tarjetaClicada.dataset.hora;
+
+      const eventoClick = listaEventos.find(
+        (evento) => evento.dia === dia && evento.hora === hora
+      );
+
+      if (eventoClick) {
+      }
+    }
   });
 
   cuerpoActividades.addEventListener("click", (event) => {
     const tarjetaClicada = event.target.closest(".tarjeta-evento");
+    if (tarjetaClicada) {
+      const dia = tarjetaClicada.dataset.dia;
+      const hora = tarjetaClicada.dataset.hora;
+
+      const eventoClick = listaEventos.find(
+        (evento) => evento.dia === dia && evento.hora === hora
+      );
+
+      if (eventoClick) {
+      }
+    }
   });
 
   modalCerrarBtn.addEventListener("click", () => {
