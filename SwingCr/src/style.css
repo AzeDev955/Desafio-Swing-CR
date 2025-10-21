@@ -275,3 +275,14 @@ header {
 .dragging {
   cursor: grabbing;
 }
+/*drag and drop estilos */
+
+.tarjeta-evento[draggable="true"] {
+  cursor: grab;
+  position: relative;
+}
+
+.tarjeta-evento[draggable="true"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(128, 0, 32, 0.15);
+}
