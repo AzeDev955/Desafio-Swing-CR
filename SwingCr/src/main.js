@@ -371,7 +371,9 @@ if (tablaClases) {
   };
 
   function manejoDragLeave(e) {
-    this.classList.remove("dragging");
+    if (tarjetaDrag) {
+      tarjetaDrag.classList.remove("dragging");
+    }
   }
 
   function manejoDropClase(e) {
