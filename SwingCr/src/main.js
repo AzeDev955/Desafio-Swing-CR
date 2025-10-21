@@ -130,6 +130,7 @@ if (tablaClases) {
       tarjeta.dataset.dia = clase.dia;
       tarjeta.dataset.hora = clase.hora;
       tarjeta.dataset.tipo = "clase";
+      tarjeta.dataset.ubicacion = clase.ubicacion;
 
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);
@@ -177,6 +178,7 @@ if (tablaClases) {
       tarjeta.dataset.dia = actividad.dia;
       tarjeta.dataset.hora = actividad.hora;
       tarjeta.dataset.tipo = "actividad";
+      tarjeta.dataset.ubicacion = actividad.ubicacion;
 
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);
@@ -213,10 +215,14 @@ if (tablaClases) {
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
       const tipo = tarjetaClicada.dataset.tipo;
+      const ubicacionTarjeta = tarjetaClicada.dataset.ubicacion;
       if (tipo === "clase") {
         eventoClick = listaEventos.find(
           (evento) =>
-            evento.dia === dia && evento.hora === hora && evento.nivel != null
+            evento.dia === dia &&
+            evento.hora === hora &&
+            evento.nivel != null &&
+            ubicacionTarjeta === evento.ubicacion
         );
 
         if (eventoClick) {
@@ -244,10 +250,14 @@ if (tablaClases) {
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
       const tipo = tarjetaClicada.dataset.tipo;
-      if (tipo === "clase") {
+      const ubicacionTarjeta = tarjetaClicada.dataset.ubicacion;
+      if (tipo === "actividad") {
         const eventoClick = listaEventos.find(
           (evento) =>
-            evento.dia === dia && evento.hora === hora && evento.nivel == null
+            evento.dia === dia &&
+            evento.hora === hora &&
+            evento.nivel == null &&
+            ubicacionTarjeta === evento.ubicacion
         );
         console.log("Evento encontrado:", eventoClick);
         if (eventoClick) {
