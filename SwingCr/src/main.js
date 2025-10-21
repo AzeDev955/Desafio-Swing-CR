@@ -1,9 +1,7 @@
 import "./style.css";
 import { Actividad } from "./modelo/Actividad.js";
 import { Clase } from "./modelo/Clase.js";
-
-const STORAGE = "eventosCR";
-const horasClase = [
+let horasClase = [
   "10:00",
   "11:00",
   "12:00",
@@ -15,7 +13,7 @@ const horasClase = [
   "20:00",
 ];
 
-const horasActividades = [
+let horasActividades = [
   "10:00",
   "11:00",
   "12:00",
@@ -32,6 +30,8 @@ const horasActividades = [
   "23:00",
   "00:00",
 ];
+const STORAGE = "eventosCR";
+
 const formulario = document.getElementById("formulario-registro");
 const tablaClases = document.getElementById("tabla-clases");
 
@@ -191,6 +191,7 @@ else if (formulario) {
   const campoUbicacionesActividades = document.getElementById(
     "ubicaciones-actividades"
   );
+  const comprobarDiaHoraUbicacion = (dia, hora, ubicacion) => {};
 
   seleccionActividad.addEventListener("change", () => {
     const valor = seleccionActividad.value;
