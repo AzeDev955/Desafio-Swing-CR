@@ -211,7 +211,8 @@ if (tablaClases) {
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
       eventoClick = listaEventos.find(
-        (evento) => evento.dia === dia && evento.hora === hora
+        (evento) =>
+          evento.dia === dia && evento.hora === hora && evento.nivel != null
       );
 
       if (eventoClick) {
@@ -237,11 +238,11 @@ if (tablaClases) {
     if (tarjetaClicada) {
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
-
       const eventoClick = listaEventos.find(
-        (evento) => evento.dia === dia && evento.hora === hora
+        (evento) =>
+          evento.dia === dia && evento.hora === hora && evento.nivel == null
       );
-
+      console.log("Evento encontrado:", eventoClick);
       if (eventoClick) {
         modalDia.textContent = eventoClick.dia;
         modalHora.textContent = eventoClick.hora;
