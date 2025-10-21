@@ -120,7 +120,7 @@ if (tablaClases) {
 
       let ubicacionTarjeta = document.createElement("div");
       ubicacionTarjeta.classList.add("tarjeta-evento__ubicacion");
-      ubicacionTarjeta.textContent = clase.ubicacion;
+      ubicacionTarjeta.textContent = `Sala: ${clase.ubicacion}`;
 
       let nivelTarjeta = document.createElement("div");
       nivelTarjeta.classList.add("tarjeta-evento__nivel");
@@ -163,10 +163,15 @@ if (tablaClases) {
 
       let ubicacionTarjeta = document.createElement("div");
       ubicacionTarjeta.classList.add("tarjeta-evento__ubicacion");
-      ubicacionTarjeta.textContent = actividad.ubicacion;
+      ubicacionTarjeta.textContent = `Ubicación: ${actividad.ubicacion}`;
+
+      let bandaTarjeta = document.createElement("div");
+      bandaTarjeta.classList.add("tarjeta-evento__banda");
+      bandaTarjeta.textContent = `Banda: ${actividad.banda}`;
 
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);
+      tarjeta.appendChild(bandaTarjeta);
 
       const celdaUbicacion = celdas[columna];
       celdaUbicacion.appendChild(tarjeta);

@@ -117,7 +117,8 @@ header {
 }
 
 .tarjeta-evento__ubicacion,
-.tarjeta-evento__nivel {
+.tarjeta-evento__nivel,
+.tarjeta-evento__banda {
   font-size: 14px;
   color: #800020;
   font-weight: 700;
