@@ -187,7 +187,7 @@ if (tablaClases) {
     }
   });
 
-  //Modal
+  //Modal/////////////////////////////////////////////////////////////////////////
   const modal = document.getElementById("modal-detalles");
   const modalCerrarBtn = document.getElementById("modal-cerrar");
   const modalTitulo = document.getElementById("modal-titulo");
@@ -212,25 +212,28 @@ if (tablaClases) {
     if (tarjetaClicada) {
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
-      eventoClick = listaEventos.find(
-        (evento) =>
-          evento.dia === dia && evento.hora === hora && evento.nivel != null
-      );
+      const tipo = tarjetaClicada.dataset.tipo;
+      if (tipo === "clase") {
+        eventoClick = listaEventos.find(
+          (evento) =>
+            evento.dia === dia && evento.hora === hora && evento.nivel != null
+        );
 
-      if (eventoClick) {
-        modalDia.textContent = eventoClick.dia;
-        modalHora.textContent = eventoClick.hora;
-        modalUbicacion.textContent = eventoClick.ubicacion;
-        modalTitulo.textContent = `Detalles de la Clase: ${eventoClick.estilo}`;
+        if (eventoClick) {
+          modalDia.textContent = eventoClick.dia;
+          modalHora.textContent = eventoClick.hora;
+          modalUbicacion.textContent = eventoClick.ubicacion;
+          modalTitulo.textContent = `Detalles de la Clase: ${eventoClick.estilo}`;
 
-        modalEstilo.textContent = eventoClick.estilo;
-        modalNivel.textContent = eventoClick.nivel;
-        modalProfesor.textContent = eventoClick.profesor;
+          modalEstilo.textContent = eventoClick.estilo;
+          modalNivel.textContent = eventoClick.nivel;
+          modalProfesor.textContent = eventoClick.profesor;
 
-        modalDetallesClase.style.display = "block";
-        modalDetallesActividad.style.display = "none";
+          modalDetallesClase.style.display = "block";
+          modalDetallesActividad.style.display = "none";
 
-        modal.classList.remove("oculto");
+          modal.classList.remove("oculto");
+        }
       }
     }
   });
@@ -240,25 +243,28 @@ if (tablaClases) {
     if (tarjetaClicada) {
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
-      const eventoClick = listaEventos.find(
-        (evento) =>
-          evento.dia === dia && evento.hora === hora && evento.nivel == null
-      );
-      console.log("Evento encontrado:", eventoClick);
-      if (eventoClick) {
-        modalDia.textContent = eventoClick.dia;
-        modalHora.textContent = eventoClick.hora;
-        modalUbicacion.textContent = eventoClick.ubicacion;
-        modalTitulo.textContent = `Detalles de la Actividad: ${eventoClick.tipo}`;
+      const tipo = tarjetaClicada.dataset.tipo;
+      if (tipo === "clase") {
+        const eventoClick = listaEventos.find(
+          (evento) =>
+            evento.dia === dia && evento.hora === hora && evento.nivel == null
+        );
+        console.log("Evento encontrado:", eventoClick);
+        if (eventoClick) {
+          modalDia.textContent = eventoClick.dia;
+          modalHora.textContent = eventoClick.hora;
+          modalUbicacion.textContent = eventoClick.ubicacion;
+          modalTitulo.textContent = `Detalles de la Actividad: ${eventoClick.tipo}`;
 
-        modalTipo.textContent = eventoClick.tipo;
-        modalBanda.textContent = eventoClick.banda;
-        modalDescripcion.textContent = eventoClick.descripcion;
+          modalTipo.textContent = eventoClick.tipo;
+          modalBanda.textContent = eventoClick.banda;
+          modalDescripcion.textContent = eventoClick.descripcion;
 
-        modalDetallesClase.style.display = "none";
-        modalDetallesActividad.style.display = "block";
+          modalDetallesClase.style.display = "none";
+          modalDetallesActividad.style.display = "block";
 
-        modal.classList.remove("oculto");
+          modal.classList.remove("oculto");
+        }
       }
     }
   });
