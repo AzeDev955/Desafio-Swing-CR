@@ -286,6 +286,37 @@ if (tablaClases) {
   });
 
   //Drag n drop///////////////////////////////////////////////////////////////////
+  const obtenerEventoTarjeta = (tarjeta) => {
+    const { dia, hora, ubicacion } = tarjeta.dataset;
+    return listaEventos.find(
+      (e) => e.dia === dia && e.hora === hora && e.ubicacion === ubicacion
+    );
+  };
+
+  const actualizarEventoEnLista = (
+    oldDia,
+    oldHora,
+    oldUbicacion,
+    newDia,
+    newHora
+  ) => {
+    const eventoIndex = listaEventos.findIndex(
+      (evento) =>
+        evento.dia === oldDia &&
+        evento.hora === oldHora &&
+        evento.ubicacion === oldUbicacion
+    );
+
+    if (eventoIndex !== -1) {
+      listaEventos[eventoIndex].dia = newDia;
+      listaEventos[eventoIndex].hora = newHora;
+
+      const eventosJSON = JSON.stringify(listaEventos);
+      localStorage.setItem(STORAGE, eventosJSON);
+      return true;
+    }
+    return false;
+  };
 
   const inicioDrag = () => {
     const tarjetas = document.querySelectorAll(".tarjeta-evento");
@@ -333,11 +364,43 @@ if (tablaClases) {
 
   function manejoDropClase(e) {
     e.preventDefault();
-    this.classList.remove("dragging");
+
+    const celdaDestino = e.currentTarget;
+    const tarjetaArrastrada = tarjetaDrag;
 
     const tipo = e.dataTransfer.getData("text/plain");
     if (tipo !== "clase") {
       return;
+    }
+
+    const newDia = celdaDestino.dataset.dia;
+    const newHora = celdaDestino.dataset.hora;
+    const oldDia = tarjetaArrastrada.dataset.dia;
+    const oldHora = tarjetaArrastrada.dataset.hora;
+    const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada);
+    const ubicacionARevisar = eventoTarjeta.ubicacion;
+
+    const eventoEnUbicacion = listaEventos.some(
+      (evento) =>
+        evento.dia === newDia &&
+        evento.hora === newHora &&
+        evento.ubicacion === ubicacionARevisar
+    );
+
+    if (!eventoEnUbicacion) {
+      tarjetaArrastrada.classList.remove("dragging");
+      celdaDestino.appendChild(tarjetaArrastrada);
+
+      tarjetaArrastrada.dataset.dia = newDia;
+      tarjetaArrastrada.dataset.hora = newHora;
+
+      actualizarEventoEnLista(
+        oldDia,
+        oldHora,
+        ubicacionARevisar,
+        newDia,
+        newHora
+      );
     }
   }
 
