@@ -86,29 +86,15 @@ if (tablaClases) {
   const soloActividades = [];
 
   listaEventos.forEach((evento) => {
-    if (evento.profesor) {
+    if (evento.profesor != null) {
       soloClases.push(evento);
     } else {
       soloActividades.push(evento);
     }
   });
   soloClases.forEach((clase) => {
-    let tarjeta = document.createElement("div");
-    tarjeta.classList.add("tarjeta-evento");
-
-    let tituloTarjeta = document.createElement("div");
-    tituloTarjeta.classList.add("tarjeta-evento__titulo");
-    tituloTarjeta.textContent = clase.estilo;
-
-    let ubicacionTarjeta = document.createElement("div");
-    ubicacionTarjeta.classList.add("tarjeta-evento__ubicacion");
-    ubicacionTarjeta.textContent = clase.ubicacion;
-
-    tarjeta.appendChild(tituloTarjeta);
-    tarjeta.appendChild(ubicacionTarjeta);
-
-    const filaCorrecta = cuerpoClase.querySelector(
-      `tr th:first-child[textContent='${clase.hora}']`
+    const filaCorrecta = Array.from(cuerpoClase.querySelectorAll("tr")).find(
+      (row) => row.querySelector("th")?.textContent === clase.hora
     ); //con ayuda de nuestro amigo confiable
 
     if (filaCorrecta) {
@@ -125,6 +111,58 @@ if (tablaClases) {
           break;
       }
       const celdas = filaCorrecta.querySelectorAll("td");
+      let tarjeta = document.createElement("div");
+      tarjeta.classList.add("tarjeta-evento");
+
+      let tituloTarjeta = document.createElement("div");
+      tituloTarjeta.classList.add("tarjeta-evento__titulo");
+      tituloTarjeta.textContent = clase.estilo;
+
+      let ubicacionTarjeta = document.createElement("div");
+      ubicacionTarjeta.classList.add("tarjeta-evento__ubicacion");
+      ubicacionTarjeta.textContent = clase.ubicacion;
+
+      tarjeta.appendChild(tituloTarjeta);
+      tarjeta.appendChild(ubicacionTarjeta);
+
+      const celdaUbicacion = celdas[columna];
+      celdaUbicacion.appendChild(tarjeta);
+    }
+  });
+
+  soloActividades.forEach((actividad) => {
+    const filaCorrecta = Array.from(
+      cuerpoActividades.querySelectorAll("tr")
+    ).find((row) => row.querySelector("th")?.textContent === actividad.hora);
+
+    if (filaCorrecta) {
+      let columna;
+      switch (actividad.dia) {
+        case "Viernes":
+          columna = 0;
+          break;
+        case "Sábado":
+          columna = 1;
+          break;
+        case "Domingo":
+          columna = 2;
+          break;
+      }
+      const celdas = filaCorrecta.querySelectorAll("td");
+      let tarjeta = document.createElement("div");
+      tarjeta.classList.add("tarjeta-evento");
+
+      let tituloTarjeta = document.createElement("div");
+      tituloTarjeta.classList.add("tarjeta-evento__titulo");
+      tituloTarjeta.textContent = actividad.tipo;
+
+      let ubicacionTarjeta = document.createElement("div");
+      ubicacionTarjeta.classList.add("tarjeta-evento__ubicacion");
+      ubicacionTarjeta.textContent = actividad.ubicacion;
+
+      tarjeta.appendChild(tituloTarjeta);
+      tarjeta.appendChild(ubicacionTarjeta);
+
       const celdaUbicacion = celdas[columna];
       celdaUbicacion.appendChild(tarjeta);
     }
