@@ -136,6 +136,7 @@ if (tablaClases) {
       tarjeta.appendChild(ubicacionTarjeta);
       tarjeta.appendChild(nivelTarjeta);
 
+      tarjeta.setAttribute("draggable", "true");
       const celdaUbicacion = celdas[columna];
       celdaUbicacion.appendChild(tarjeta);
     }
@@ -184,6 +185,7 @@ if (tablaClases) {
       tarjeta.appendChild(ubicacionTarjeta);
       tarjeta.appendChild(bandaTarjeta);
 
+      tarjeta.setAttribute("draggable", "true");
       const celdaUbicacion = celdas[columna];
       celdaUbicacion.appendChild(tarjeta);
     }
