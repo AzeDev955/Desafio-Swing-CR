@@ -65,7 +65,10 @@ if (tablaClases) {
     nuevoTh.textContent = hora;
     nuevaFila.appendChild(nuevoTh);
     for (let i = 0; i < 3; i++) {
+      const dias = ["Viernes", "Sábado", "Domingo"];
       let nuevoTd = document.createElement("td");
+      nuevoTd.dataset.dia = dias[i];
+      nuevoTd.dataset.hora = hora;
       nuevaFila.appendChild(nuevoTd);
     }
     cuerpoClase.appendChild(nuevaFila);
@@ -77,7 +80,10 @@ if (tablaClases) {
     nuevoTh.textContent = hora;
     nuevaFila.appendChild(nuevoTh);
     for (let i = 0; i < 3; i++) {
+      const dias = ["Viernes", "Sábado", "Domingo"];
       let nuevoTd = document.createElement("td");
+      nuevoTd.dataset.dia = dias[i];
+      nuevoTd.dataset.hora = hora;
       nuevaFila.appendChild(nuevoTd);
     }
     cuerpoActividades.appendChild(nuevaFila);
