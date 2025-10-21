@@ -630,13 +630,11 @@ if (formulario) {
         );
         const descripcion = descripcionInput.value;
 
-        evento = new Actividad(dia, hora, ubicacion, tipo, banda, descripcion);
-        break;
-    }
-    listaEventos.push(evento);
-    const eventosJSON = JSON.stringify(listaEventos);
-    localStorage.setItem(STORAGE, eventosJSON);
-    resetUbicaciones();
-    marcarSalasOcupadas();
-  });
-}
+      evento = new Actividad(dia, hora, ubicacion, tipo, banda, descripcion);
+      break;
+  }
+  formulario.reset();
+  listaEventos.push(evento);
+  const eventosJSON = JSON.stringify(listaEventos);
+  localStorage.setItem(STORAGE, eventosJSON);
+});
