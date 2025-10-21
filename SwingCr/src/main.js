@@ -122,8 +122,13 @@ if (tablaClases) {
       ubicacionTarjeta.classList.add("tarjeta-evento__ubicacion");
       ubicacionTarjeta.textContent = clase.ubicacion;
 
+      let nivelTarjeta = document.createElement("div");
+      nivelTarjeta.classList.add("tarjeta-evento__nivel");
+      nivelTarjeta.textContent = clase.nivel;
+
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);
+      tarjeta.appendChild(nivelTarjeta);
 
       const celdaUbicacion = celdas[columna];
       celdaUbicacion.appendChild(tarjeta);
