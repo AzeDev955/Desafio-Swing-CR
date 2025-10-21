@@ -129,6 +129,7 @@ if (tablaClases) {
       //Datasets para encontrar el div
       tarjeta.dataset.dia = clase.dia;
       tarjeta.dataset.hora = clase.hora;
+      tarjeta.dataset.tipo = "clase";
 
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);
@@ -175,6 +176,7 @@ if (tablaClases) {
 
       tarjeta.dataset.dia = actividad.dia;
       tarjeta.dataset.hora = actividad.hora;
+      tarjeta.dataset.tipo = "actividad";
 
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);
