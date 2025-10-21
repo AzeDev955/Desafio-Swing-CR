@@ -224,8 +224,15 @@ else if (formulario) {
     const horaSeleccionada = horaSelect.value;
     let arrayDiaHora = [];
     listaEventos.forEach((evento) => {
-      diaHora = [evento.dia, evento.hora];
-      arrayDiaHora.push(diaHora);
+      diaHoraUbicacion = [evento.dia, evento.hora, evento.ubicacion];
+      arrayDiaHora.push(diaHoraUbicacion);
+    });
+    arrayDiaHora.forEach((evento) => {
+      let diaEvento = evento[0];
+      let horaEvento = evento[1];
+      let ubicacionEvento = evento[2];
+      if (diaEvento == diaSeleccionado && horaEvento == horaSeleccionada) {
+      }
     });
   }
   diaSelect.addEventListener("change", () => {
