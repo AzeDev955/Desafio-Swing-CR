@@ -1,6 +1,9 @@
 import "./style.css";
 import { Actividad } from "./modelo/Actividad.js";
 import { Clase } from "./modelo/Clase.js";
+
+const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
+const salasActividades = ["Antiguo casino", "Parque", "Prado"];
 let horasClase = [
   "10:00",
   "11:00",
@@ -418,19 +421,37 @@ if (tablaClases) {
   }
 
   function manejoDropActividad(e) {
-    e.preventDefault();
-    this.classList.remove("dragging");
+  e.preventDefault();
 
-    const tipo = e.dataTransfer.getData("text/plain");
-    if (tipo !== "actividad") {
-      return;
-    }
-    const newDia = celdaDestino.dataset.dia;
-    const newHora = celdaDestino.dataset.hora;
-    const oldDia = tarjetaArrastrada.dataset.dia;
-    const oldHora = tarjetaArrastrada.dataset.hora;
-    const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada);
+  const celdaDestino = e.currentTarget;
+  const tarjetaArrastrada = tarjetaDrag;
 
+  const tipo = e.dataTransfer.getData("text/plain");
+  if (tipo !== "actividad") {
+    return;
+  }
+
+  const newDia = celdaDestino.dataset.dia;
+  const newHora = celdaDestino.dataset.hora;
+  const oldDia = tarjetaArrastrada.dataset.dia;
+  const oldHora = tarjetaArrastrada.dataset.hora;
+  const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada);
+  const ubicacionARevisar = eventoTarjeta.ubicacion;
+
+  // ✅ SOLO verificar conflicto si es una SALA DE CLASE
+  let claseOcupada = false;
+  
+  if (salasClase.includes(ubicacionARevisar)) {
+    claseOcupada = listaEventos.some(
+      (evento) =>
+        evento.dia === newDia &&
+        evento.hora === newHora &&
+        evento.ubicacion === ubicacionARevisar 
+    );
+  }
+  
+
+  if (!claseOcupada) {
     tarjetaArrastrada.classList.remove("dragging");
     celdaDestino.appendChild(tarjetaArrastrada);
 
@@ -446,15 +467,14 @@ if (tablaClases) {
     );
 
     inicioDrag();
+  } else {
+    return;
   }
-
-  inicioDrag();
 }
 
 //formulario///////////////////////////////////////////////////////////////////////
-else if (formulario) {
-  const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
-  const salasActividades = ["Antiguo casino", "Parque", "Prado"];
+if (formulario) {
+  
   const diaSelect = document.getElementById("dia");
   const horaSelect = document.getElementById("hora");
   const seleccionActividad = document.getElementById("tipo-evento");
