@@ -137,6 +137,7 @@ export function inicioFormulario(
     const actividad = seleccionActividad.value;
 
     let evento;
+    let formularioCorrecto = true;
     switch (actividad) {
       case "Clase":
         const estiloOption = document.getElementById("clase-estilo");
@@ -151,10 +152,16 @@ export function inicioFormulario(
             horaOption,
             "Las clases solo pueden estar entre las 10:00 y las 20:00"
           );
-        }
-        if (dia === "Viernes" || dia === "Domingo") {
-          mostrarErrorCampo(diaOption, "Selecciona el dia que quieras");
-          return;
+          formularioCorrecto = false;
+          if (dia === "Viernes") {
+            if (!horasClaseViernes.includes(hora)) {
+              mostrarErrorCampo(
+                horaOption,
+                "Los viernes empezamos a las 20:00"
+              );
+              formularioCorrecto = false;
+            }
+          }
         }
 
         if (profesor.length < 3) {
@@ -162,10 +169,12 @@ export function inicioFormulario(
             profesorInput,
             "El nombre del profesor debe ser mayor de tres letras"
           );
-          return;
+          formularioCorrecto = false;
+        }
+        if (formularioCorrecto) {
+          evento = new Clase(dia, hora, ubicacion, estilo, nivel, profesor);
         }
 
-        evento = new Clase(dia, hora, ubicacion, estilo, nivel, profesor);
         break;
       case "Actividad":
         const tipoOption = document.getElementById("actividad-tipo");
@@ -181,20 +190,31 @@ export function inicioFormulario(
           "actividad-descripcion"
         );
         const descripcion = descripcionInput.value;
+        if (formularioCorrecto) {
+          evento = new Actividad(
+            dia,
+            hora,
+            ubicacion,
+            tipo,
+            banda,
+            descripcion
+          );
+        }
 
-        evento = new Actividad(dia, hora, ubicacion, tipo, banda, descripcion);
         break;
     }
-    resetFormulario(
-      formulario,
-      campoActividades,
-      campoClase,
-      campoUbicacionesActividades,
-      campoUbicacionesClases
-    );
-    listaEventos.push(evento);
-    const eventosJSON = JSON.stringify(listaEventos);
-    localStorage.setItem(STORAGE, eventosJSON);
+    if (formularioCorrecto) {
+      resetFormulario(
+        formulario,
+        campoActividades,
+        campoClase,
+        campoUbicacionesActividades,
+        campoUbicacionesClases
+      );
+      listaEventos.push(evento);
+      const eventosJSON = JSON.stringify(listaEventos);
+      localStorage.setItem(STORAGE, eventosJSON);
+    }
   });
 }
 
@@ -210,6 +230,16 @@ const resetFormulario = (
   campoActividades.classList.add("oculto");
   campoUbicacionesClases.classList.add("oculto");
   campoUbicacionesActividades.classList.add("oculto");
+  const mensajesError = formulario.querySelectorAll(".error-mensaje");
+  mensajesError.forEach((mensaje) => {
+    mensaje.textContent = "";
+    mensaje.classList.add("oculto");
+  });
+
+  const inputsValidados = formulario.querySelectorAll(".valido, .invalido");
+  inputsValidados.forEach((input) => {
+    input.classList.remove("valido", "invalido");
+  });
 };
 
 const resetUbicaciones = () => {
