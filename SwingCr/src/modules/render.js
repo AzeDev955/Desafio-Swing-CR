@@ -1,9 +1,8 @@
-const tablaClases = document.getElementById("tabla-clases");
-const tablaActividades = document.getElementById("tabla-actividades");
-const cuerpoClase = tablaClases.querySelector("tbody");
-const cuerpoActividades = tablaActividades.querySelector("tbody");
-
 export function iniciarTablas(horasClase, horasActividades, dias) {
+  const tablaClases = document.getElementById("tabla-clases");
+  const tablaActividades = document.getElementById("tabla-actividades");
+  const cuerpoClase = tablaClases.querySelector("tbody");
+  const cuerpoActividades = tablaActividades.querySelector("tbody");
   horasClase.forEach((hora) => {
     let nuevaFila = document.createElement("tr");
     let nuevoTh = document.createElement("th");

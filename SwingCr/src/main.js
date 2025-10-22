@@ -328,11 +328,5 @@ if (tablaClases) {
     }
   }
 } else if (formulario) {
-  inicioFormulario(
-    listaEventos,
-    salasClase,
-    horasClase,
-    horasActividades,
-    STORAGE
-  );
+  inicioFormulario(listaEventos, salasClase, STORAGE);
 }

@@ -1,83 +1,40 @@
 import { Clase } from "../modelo/Clase";
 import { Actividad } from "../modelo/Actividad";
-const formulario = document.getElementById("formulario-registro");
-const diaSelect = document.getElementById("dia");
-const horaSelect = document.getElementById("hora");
-const seleccionActividad = document.getElementById("tipo-evento");
-const campoClase = document.getElementById("campos-clase");
-const campoActividades = document.getElementById("campos-actividad");
-const campoUbicacionesClases = document.getElementById("ubicaciones-clases");
-const campoUbicacionesActividades = document.getElementById(
-  "ubicaciones-actividades"
-);
 
-export function inicioFormulario(
-  listaEventos,
-  salasClase,
-  horasClase,
-  horasActividades,
-  STORAGE
-) {
-  const marcarSalasOcupadas = () => {
-    const diaSeleccionado = diaSelect.value;
-    const horaSeleccionada = horaSelect.value;
-    const actividadSeleccionada = seleccionActividad.value;
+export function inicioFormulario(listaEventos, salasClase, STORAGE) {
+  const formulario = document.getElementById("formulario-registro");
+  const diaSelect = document.getElementById("dia");
+  const horaSelect = document.getElementById("hora");
+  const seleccionActividad = document.getElementById("tipo-evento");
+  const campoClase = document.getElementById("campos-clase");
+  const campoActividades = document.getElementById("campos-actividad");
+  const campoUbicacionesClases = document.getElementById("ubicaciones-clases");
+  const campoUbicacionesActividades = document.getElementById(
+    "ubicaciones-actividades"
+  );
+  const seleccionBanda = document.getElementById("actividad-tipo");
+  const campoBanda = document.getElementById("grupo-banda");
 
-    if (diaSeleccionado && horaSeleccionada && seleccionActividad) {
-      let arrayDiaHora = [];
-      listaEventos.forEach((evento) => {
-        let diaHoraUbicacion = [evento.dia, evento.hora, evento.ubicacion];
-        arrayDiaHora.push(diaHoraUbicacion);
-      });
-      let salasOcupadas = [];
-      arrayDiaHora.forEach((evento) => {
-        let diaEvento = evento[0];
-        let horaEvento = evento[1];
-        let ubicacionEvento = evento[2];
-        if (diaEvento == diaSeleccionado && horaEvento == horaSeleccionada) {
-          if (salasClase.includes(ubicacionEvento)) {
-            salasOcupadas.push(ubicacionEvento);
-          }
-        }
-      });
-      if (salasOcupadas.length > 0) {
-        salasOcupadas.forEach((sala) => {
-          const fila = document.getElementById(sala);
-          if (fila) {
-            fila.classList.add("ocupado");
-            const inputFila = fila.querySelector("input[type='radio']");
-            if (inputFila) {
-              inputFila.disabled = true;
-            }
-          }
-        });
-      }
-    }
-  };
-
-  const resetUbicaciones = () => {
-    const diaSeleccionado = diaSelect.value;
-    const horaSeleccionada = horaSelect.value;
-    const actividadSeleccionada = seleccionActividad.value;
-    const filasRadio = document.querySelectorAll(
-      "#contenedor-ubicaciones .radio-fila"
-    );
-    filasRadio.forEach((fila) => {
-      fila.classList.remove("ocupado");
-      const inputRadio = fila.querySelector("input[type='radio']");
-      if (inputRadio) {
-        inputRadio.disabled = false;
-      }
-    });
-  };
   diaSelect.addEventListener("change", () => {
     resetUbicaciones();
-    marcarSalasOcupadas();
+    marcarSalasOcupadas(
+      diaSelect,
+      horaSelect,
+      seleccionActividad,
+      salasClase,
+      listaEventos
+    );
   });
 
   horaSelect.addEventListener("change", () => {
     resetUbicaciones();
-    marcarSalasOcupadas();
+    marcarSalasOcupadas(
+      diaSelect,
+      horaSelect,
+      seleccionActividad,
+      salasClase,
+      listaEventos
+    );
   });
 
   seleccionActividad.addEventListener("change", () => {
@@ -89,7 +46,13 @@ export function inicioFormulario(
         campoUbicacionesClases.classList.remove("oculto");
         campoUbicacionesActividades.classList.add("oculto");
         resetUbicaciones();
-        marcarSalasOcupadas();
+        marcarSalasOcupadas(
+          diaSelect,
+          horaSelect,
+          seleccionActividad,
+          salasClase,
+          listaEventos
+        );
         break;
       case "Actividad":
         campoClase.classList.add("oculto");
@@ -97,7 +60,13 @@ export function inicioFormulario(
         campoUbicacionesClases.classList.remove("oculto");
         campoUbicacionesActividades.classList.remove("oculto");
         resetUbicaciones();
-        marcarSalasOcupadas();
+        marcarSalasOcupadas(
+          diaSelect,
+          horaSelect,
+          seleccionActividad,
+          salasClase,
+          listaEventos
+        );
         break;
 
       default:
@@ -109,9 +78,6 @@ export function inicioFormulario(
         break;
     }
   });
-
-  const seleccionBanda = document.getElementById("actividad-tipo");
-  const campoBanda = document.getElementById("grupo-banda");
 
   seleccionBanda.addEventListener("change", () => {
     if (seleccionBanda.value === "Concierto") {
@@ -168,9 +134,70 @@ export function inicioFormulario(
         evento = new Actividad(dia, hora, ubicacion, tipo, banda, descripcion);
         break;
     }
-    formulario.reset();
+    resetFormulario(formulario, campoActividades, campoBanda);
     listaEventos.push(evento);
     const eventosJSON = JSON.stringify(listaEventos);
     localStorage.setItem(STORAGE, eventosJSON);
   });
 }
+
+const resetFormulario = (formulario, campoActividades, campoClase) => {
+  formulario.reset();
+  campoActividades.classList.add("oculto");
+  campoClase.classList.add("oculto");
+};
+
+const resetUbicaciones = () => {
+  const filasRadio = document.querySelectorAll(
+    "#contenedor-ubicaciones .radio-fila"
+  );
+  filasRadio.forEach((fila) => {
+    fila.classList.remove("ocupado");
+    const inputRadio = fila.querySelector("input[type='radio']");
+    if (inputRadio) {
+      inputRadio.disabled = false;
+    }
+  });
+};
+
+const marcarSalasOcupadas = (
+  diaSelect,
+  horaSelect,
+  seleccionActividad,
+  salasClase,
+  listaEventos
+) => {
+  const diaSeleccionado = diaSelect.value;
+  const horaSeleccionada = horaSelect.value;
+
+  if (diaSeleccionado && horaSeleccionada && seleccionActividad) {
+    let arrayDiaHora = [];
+    listaEventos.forEach((evento) => {
+      let diaHoraUbicacion = [evento.dia, evento.hora, evento.ubicacion];
+      arrayDiaHora.push(diaHoraUbicacion);
+    });
+    let salasOcupadas = [];
+    arrayDiaHora.forEach((evento) => {
+      let diaEvento = evento[0];
+      let horaEvento = evento[1];
+      let ubicacionEvento = evento[2];
+      if (diaEvento == diaSeleccionado && horaEvento == horaSeleccionada) {
+        if (salasClase.includes(ubicacionEvento)) {
+          salasOcupadas.push(ubicacionEvento);
+        }
+      }
+    });
+    if (salasOcupadas.length > 0) {
+      salasOcupadas.forEach((sala) => {
+        const fila = document.getElementById(sala);
+        if (fila) {
+          fila.classList.add("ocupado");
+          const inputFila = fila.querySelector("input[type='radio']");
+          if (inputFila) {
+            inputFila.disabled = true;
+          }
+        }
+      });
+    }
+  }
+};
