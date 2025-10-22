@@ -86,6 +86,8 @@ header {
   color: #ffffff;
   font-family: "Playfair Display", serif;
   font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .tabla-programa tbody th {
