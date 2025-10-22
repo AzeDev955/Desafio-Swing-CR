@@ -1,7 +1,7 @@
 import { cargarEventos } from "../main";
+const STORAGE = "eventosCR";
+let listaEventos = cargarEventos(STORAGE);
 
-let listaEventosRef = cargarEventos();
-let STORAGE = "eventosCR";
 let tarjetaDrag = null; // Tarjeta que se está arrastrando
 
 const inicioDrag = (listaEventos) => {
