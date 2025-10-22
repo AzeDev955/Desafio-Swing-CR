@@ -4,6 +4,7 @@ import { Clase } from "./modelo/Clase.js";
 import { inicioFormulario } from "./modules/formulario.js";
 import { iniciarTablas } from "./modules/render.js";
 import { cargarTarjetas } from "./modules/render.js";
+import { manejarModal } from "./modules/modal.js";
 
 const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
 const salasActividades = ["Antiguo casino", "Parque", "Prado"];
@@ -56,6 +57,7 @@ const listaEventos = cargarEventos();
 if (tablaClases) {
   iniciarTablas(horasClase, horasActividades, dias);
   cargarTarjetas(listaEventos, STORAGE);
+  manejarModal();
   //Modal/////////////////////////////////////////////////////////////////////////
 
   //Drag n drop///////////////////////////////////////////////////////////////////
