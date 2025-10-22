@@ -81,5 +81,14 @@ if (tablaClases) {
   manejarDragAndDrop(listaEventos, STORAGE);
   manejarModal();
 } else if (formulario) {
-  inicioFormulario(listaEventos, salasClase, STORAGE);
+  inicioFormulario(
+    listaEventos,
+    salasClase,
+    STORAGE,
+    horasActividades,
+    horasClase,
+    horasClaseViernes,
+    horasActividadesViernes,
+    horasActividadesDomingo
+  );
 }
