@@ -42,14 +42,14 @@ const STORAGE = "eventosCR";
 const formulario = document.getElementById("formulario-registro");
 const tablaClases = document.getElementById("tabla-clases");
 
-const cargarEventos = () => {
+export function cargarEventos() {
   const eventosGuardados = localStorage.getItem(STORAGE);
   if (eventosGuardados) {
     return JSON.parse(eventosGuardados);
   } else {
     return [];
   }
-};
+}
 
 const listaEventos = cargarEventos();
 

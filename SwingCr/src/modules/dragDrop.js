@@ -1,43 +1,10 @@
-export function manejarDragAndDrop(listaEventos, STORAGE) {
-  let tarjetaDrag = null;
-    const newDia = celdaDestino.dataset.dia;
-    const newHora = celdaDestino.dataset.hora;
-    const oldDia = tarjetaArrastrada.dataset.dia;
-    const oldHora = tarjetaArrastrada.dataset.hora;
-    const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada);
-    const ubicacionARevisar = eventoTarjeta.ubicacion;
+import { cargarEventos } from "../main";
 
-    const eventoEnUbicacion = listaEventos.some(
-      (evento) =>
-        evento.dia === newDia &&
-        evento.hora === newHora &&
-        evento.ubicacion === ubicacionARevisar
-    );
+let listaEventosRef = cargarEventos();
+let STORAGE = "eventosCR";
+let tarjetaDrag = null; // Tarjeta que se está arrastrando
 
-    if (!eventoEnUbicacion) {
-      tarjetaArrastrada.classList.remove("dragging");
-      celdaDestino.appendChild(tarjetaArrastrada);
-
-      tarjetaArrastrada.dataset.dia = newDia;
-      tarjetaArrastrada.dataset.hora = newHora;
-
-      actualizarEventoEnLista(
-        oldDia,
-        oldHora,
-        ubicacionARevisar,
-        newDia,
-        newHora
-      );
-
-      inicioDrag();
-    } else {
-      return;
-    }
-  }
-  inicioDrag();
-
-
-const inicioDrag = () => {
+const inicioDrag = (listaEventos) => {
   const tarjetas = document.querySelectorAll(".tarjeta-evento");
   const celdasClase = document.querySelectorAll("#tabla-clases td");
   const celdasActividad = document.querySelectorAll("#tabla-actividades td");
@@ -61,7 +28,7 @@ const inicioDrag = () => {
   });
 };
 
-const obtenerEventoTarjeta = (tarjeta) => {
+const obtenerEventoTarjeta = (tarjeta, listaEventos) => {
   const { dia, hora, ubicacion } = tarjeta.dataset;
   return listaEventos.find(
     (e) => e.dia === dia && e.hora === hora && e.ubicacion === ubicacion
@@ -83,7 +50,7 @@ const manejoDropActividad = (e) => {
   const newHora = celdaDestino.dataset.hora;
   const oldDia = tarjetaArrastrada.dataset.dia;
   const oldHora = tarjetaArrastrada.dataset.hora;
-  const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada);
+  const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada, listaEventos);
   const ubicacionARevisar = eventoTarjeta.ubicacion;
 
   let claseOcupada = false;
@@ -145,10 +112,10 @@ const actualizarEventoEnLista = (
   }
   return false;
 };
-const manejoDragstart = (e) => {
-  tarjetaDrag = e.currentTarget;
+const manejoDragstart = (tarjeta, e) => {
+  tarjeta = e.currentTarget;
   e.dataTransfer.setData("text/plain", tarjetaDrag.dataset.tipo);
-  tarjetaDrag.classList.add("dragging");
+  tarjeta.classList.add("dragging");
 };
 
 const manejoDragOver = (e) => {
@@ -158,19 +125,57 @@ const manejoDragOver = (e) => {
 const manejoDragEnter = (e) => {
   e.preventDefault();
 };
-const manejoDragLeave = (e) => {
-    if (tarjetaDrag) {
-      tarjetaDrag.classList.remove("dragging");
-    }
+const manejoDragLeave = (tarjetaDrag) => {
+  if (tarjetaDrag) {
+    tarjetaDrag.classList.remove("dragging");
+  }
+};
+function manejoDropClase(e) {
+  e.preventDefault();
+
+  const celdaDestino = e.currentTarget;
+  const tarjetaArrastrada = tarjetaDrag;
+
+  const tipo = e.dataTransfer.getData("text/plain");
+  if (tipo !== "clase") {
+    return;
   }
 
-  const manejoDropClase= (e) => {
-    e.preventDefault();
+  const newDia = celdaDestino.dataset.dia;
+  const newHora = celdaDestino.dataset.hora;
+  const oldDia = tarjetaArrastrada.dataset.dia;
+  const oldHora = tarjetaArrastrada.dataset.hora;
+  const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada, listaEventos);
+  const ubicacionARevisar = eventoTarjeta.ubicacion;
 
-    const celdaDestino = e.currentTarget;
-    const tarjetaArrastrada = tarjetaDrag;
+  const eventoEnUbicacion = listaEventos.some(
+    (evento) =>
+      evento.dia === newDia &&
+      evento.hora === newHora &&
+      evento.ubicacion === ubicacionARevisar
+  );
 
-    const tipo = e.dataTransfer.getData("text/plain");
-    if (tipo !== "clase") {
-      return;
-    }
+  if (!eventoEnUbicacion) {
+    tarjetaArrastrada.classList.remove("dragging");
+    celdaDestino.appendChild(tarjetaArrastrada);
+
+    tarjetaArrastrada.dataset.dia = newDia;
+    tarjetaArrastrada.dataset.hora = newHora;
+
+    actualizarEventoEnLista(
+      oldDia,
+      oldHora,
+      ubicacionARevisar,
+      newDia,
+      newHora
+    );
+
+    inicioDrag();
+  } else {
+    return;
+  }
+}
+
+export function manejarDragAndDrop(listaEventos) {
+  inicioDrag(listaEventos);
+}
