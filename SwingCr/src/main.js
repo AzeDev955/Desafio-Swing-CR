@@ -8,6 +8,21 @@ import { manejarDragAndDrop } from "./modules/dragDrop.js";
 const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
 const salasActividades = ["Antiguo casino", "Parque", "Prado"];
 const dias = ["Viernes", "Sábado", "Domingo"];
+const horasClaseViernes = ["20:00"];
+const horasActividadesViernes = ["20:00", "21:00", "22:00", "23:00", "00:00"];
+const horasActividadesDomingo = [
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
+  "19:00",
+  "20:00",
+];
 let horasClase = [
   "10:00",
   "11:00",
@@ -54,7 +69,14 @@ export function cargarEventos(STORAGE) {
 const listaEventos = cargarEventos(STORAGE);
 
 if (tablaClases) {
-  iniciarTablas(horasClase, horasActividades, dias);
+  iniciarTablas(
+    horasClase,
+    horasActividades,
+    dias,
+    horasClaseViernes,
+    horasActividadesViernes,
+    horasActividadesDomingo
+  );
   cargarTarjetas(listaEventos);
   manejarDragAndDrop(listaEventos, STORAGE);
   manejarModal();

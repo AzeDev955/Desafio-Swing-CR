@@ -286,3 +286,7 @@ header {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(128, 0, 32, 0.15);
 }
+
+.hora_no_usable {
+  background-color: #888;
+}

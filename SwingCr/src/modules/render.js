@@ -1,4 +1,11 @@
-export function iniciarTablas(horasClase, horasActividades, dias) {
+export function iniciarTablas(
+  horasClase,
+  horasActividades,
+  dias,
+  horasClaseViernes,
+  horasActividadesViernes,
+  horasActividadesDomingo
+) {
   const tablaClases = document.getElementById("tabla-clases");
   const tablaActividades = document.getElementById("tabla-actividades");
   const cuerpoClase = tablaClases.querySelector("tbody");
@@ -23,13 +30,39 @@ export function iniciarTablas(horasClase, horasActividades, dias) {
     nuevoTh.textContent = hora;
     nuevaFila.appendChild(nuevoTh);
     for (let i = 0; i < 3; i++) {
-      const dias = ["Viernes", "Sábado", "Domingo"];
       let nuevoTd = document.createElement("td");
       nuevoTd.dataset.dia = dias[i];
       nuevoTd.dataset.hora = hora;
       nuevaFila.appendChild(nuevoTd);
     }
     cuerpoActividades.appendChild(nuevaFila);
+  });
+  const filasActividades = cuerpoActividades.querySelectorAll("td");
+  filasActividades.forEach((fila) => {
+    switch (fila.dataset.dia) {
+      case "Viernes":
+        if (!horasActividadesViernes.includes(fila.dataset.hora)) {
+          fila.classList.add("hora_no_usable");
+        }
+
+        break;
+      case "Domingo":
+        if (!horasActividadesDomingo.includes(fila.dataset.hora)) {
+          fila.classList.add("hora_no_usable");
+        }
+        break;
+    }
+  });
+  const filasClases = cuerpoClase.querySelectorAll("td");
+  filasClases.forEach((fila) => {
+    switch (fila.dataset.dia) {
+      case "Viernes":
+        if (!horasClaseViernes.includes(fila.dataset.hora))
+          fila.classList.add("hora_no_usable");
+        break;
+      case "Domingo":
+        break;
+    }
   });
 }
 
