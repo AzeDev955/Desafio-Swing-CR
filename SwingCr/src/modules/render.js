@@ -33,7 +33,11 @@ export function iniciarTablas(horasClase, horasActividades, dias) {
   });
 }
 
-export function cargarTarjetas(listaEventos, STORAGE) {
+export function cargarTarjetas(listaEventos) {
+  const tablaClases = document.getElementById("tabla-clases");
+  const tablaActividades = document.getElementById("tabla-actividades");
+  const cuerpoClase = tablaClases.querySelector("tbody");
+  const cuerpoActividades = tablaActividades.querySelector("tbody");
   const soloClases = [];
   const soloActividades = [];
 

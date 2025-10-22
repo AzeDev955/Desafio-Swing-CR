@@ -134,17 +134,31 @@ export function inicioFormulario(listaEventos, salasClase, STORAGE) {
         evento = new Actividad(dia, hora, ubicacion, tipo, banda, descripcion);
         break;
     }
-    resetFormulario(formulario, campoActividades, campoClase);
+    resetFormulario(
+      formulario,
+      campoActividades,
+      campoClase,
+      campoUbicacionesActividades,
+      campoUbicacionesClases
+    );
     listaEventos.push(evento);
     const eventosJSON = JSON.stringify(listaEventos);
     localStorage.setItem(STORAGE, eventosJSON);
   });
 }
 
-const resetFormulario = (formulario, campoActividades, campoClase) => {
+const resetFormulario = (
+  formulario,
+  campoActividades,
+  campoClase,
+  campoUbicacionesActividades,
+  campoUbicacionesClases
+) => {
   formulario.reset();
-  campoActividades.classList.add("oculto");
   campoClase.classList.add("oculto");
+  campoActividades.classList.add("oculto");
+  campoUbicacionesClases.classList.add("oculto");
+  campoUbicacionesActividades.classList.add("oculto");
 };
 
 const resetUbicaciones = () => {
