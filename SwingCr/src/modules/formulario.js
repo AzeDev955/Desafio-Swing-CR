@@ -134,7 +134,7 @@ export function inicioFormulario(listaEventos, salasClase, STORAGE) {
         evento = new Actividad(dia, hora, ubicacion, tipo, banda, descripcion);
         break;
     }
-    resetFormulario(formulario, campoActividades, campoBanda);
+    resetFormulario(formulario, campoActividades, campoClase);
     listaEventos.push(evento);
     const eventosJSON = JSON.stringify(listaEventos);
     localStorage.setItem(STORAGE, eventosJSON);
