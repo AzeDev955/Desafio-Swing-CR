@@ -103,6 +103,9 @@ export function inicioFormulario(listaEventos, salasClase, STORAGE) {
       ubicacion = ubicacionOption.value;
     }
     const actividad = seleccionActividad.value;
+    if (!dia || !hora || !actividad) {
+      return;
+    }
     let evento;
     switch (actividad) {
       case "Clase":
@@ -113,6 +116,9 @@ export function inicioFormulario(listaEventos, salasClase, STORAGE) {
         const profesor = profesorInput.value;
         const nivel = nivelOption.value;
         const estilo = estiloOption.value;
+        if (profesor.length < 3) {
+          return;
+        }
 
         evento = new Clase(dia, hora, ubicacion, estilo, nivel, profesor);
         break;
