@@ -158,14 +158,11 @@ export function inicioFormulario(
             "Las clases solo pueden estar entre las 10:00 y las 20:00"
           );
           formularioCorrecto = false;
-          if (dia === "Viernes") {
-            if (!horasClaseViernes.includes(hora)) {
-              mostrarErrorCampo(
-                horaOption,
-                "Los viernes empezamos a las 20:00"
-              );
-              formularioCorrecto = false;
-            }
+        }
+        if (dia === "Viernes") {
+          if (!horasClaseViernes.includes(hora)) {
+            mostrarErrorCampo(horaOption, "Los viernes empezamos a las 20:00");
+            formularioCorrecto = false;
           }
         }
 
