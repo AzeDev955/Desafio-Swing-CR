@@ -70,6 +70,8 @@ header {
 
 .tabla-programa th,
 .tabla-programa td {
+  height: 70px;
+  max-height: fit-content;
   border: 1px solid #ddcdbe;
   padding: 8px;
   vertical-align: top;
@@ -94,6 +96,8 @@ header {
 }
 
 .tarjeta-evento {
+  height: 70px;
+  max-height: fit-content;
   background-color: #ffffff;
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
