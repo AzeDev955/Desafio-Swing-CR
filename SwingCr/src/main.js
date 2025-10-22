@@ -51,13 +51,13 @@ export function cargarEventos(STORAGE) {
   }
 }
 
-const listaEventos = cargarEventos();
+const listaEventos = cargarEventos(STORAGE);
 
 if (tablaClases) {
   iniciarTablas(horasClase, horasActividades, dias);
-  cargarTarjetas(listaEventos, STORAGE);
-  manejarModal(listaEventos);
+  cargarTarjetas(listaEventos);
   manejarDragAndDrop(listaEventos, STORAGE);
+  manejarModal();
 } else if (formulario) {
   inicioFormulario(listaEventos, salasClase, STORAGE);
 }

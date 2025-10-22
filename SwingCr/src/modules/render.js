@@ -50,7 +50,7 @@ export function cargarTarjetas(listaEventos) {
   });
   soloClases.forEach((clase) => {
     const filaCorrecta = Array.from(cuerpoClase.querySelectorAll("tr")).find(
-      (row) => row.querySelector("th")?.textContent === clase.hora
+      (row) => row.querySelector("th")?.textContent.trim() === clase.hora
     ); //con ayuda de nuestro amigo confiable
 
     if (filaCorrecta) {

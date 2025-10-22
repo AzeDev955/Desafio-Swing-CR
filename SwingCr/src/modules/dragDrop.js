@@ -1,4 +1,5 @@
 import { cargarEventos } from "../main";
+
 const STORAGE = "eventosCR";
 let listaEventos = cargarEventos(STORAGE);
 
@@ -79,7 +80,7 @@ const manejoDropActividad = (e) => {
       newHora
     );
 
-    inicioDrag();
+    inicioDrag(listaEventos);
   } else {
     return;
   }
@@ -108,14 +109,15 @@ const actualizarEventoEnLista = (
 
     const eventosJSON = JSON.stringify(listaEventos);
     localStorage.setItem(STORAGE, eventosJSON);
+
     return true;
   }
   return false;
 };
-const manejoDragstart = (tarjeta, e) => {
-  tarjeta = e.currentTarget;
+const manejoDragstart = (e) => {
+  tarjetaDrag = e.currentTarget;
   e.dataTransfer.setData("text/plain", tarjetaDrag.dataset.tipo);
-  tarjeta.classList.add("dragging");
+  tarjetaDrag.classList.add("dragging");
 };
 
 const manejoDragOver = (e) => {
@@ -125,7 +127,7 @@ const manejoDragOver = (e) => {
 const manejoDragEnter = (e) => {
   e.preventDefault();
 };
-const manejoDragLeave = (tarjetaDrag) => {
+const manejoDragLeave = () => {
   if (tarjetaDrag) {
     tarjetaDrag.classList.remove("dragging");
   }
@@ -170,7 +172,7 @@ function manejoDropClase(e) {
       newHora
     );
 
-    inicioDrag();
+    inicioDrag(listaEventos);
   } else {
     return;
   }

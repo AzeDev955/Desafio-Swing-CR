@@ -1,4 +1,4 @@
-export function manejarModal(listaEventos) {
+export function manejarModal() {
   const tablaClases = document.getElementById("tabla-clases");
   const tablaActividades = document.getElementById("tabla-actividades");
   const cuerpoClase = tablaClases.querySelector("tbody");
@@ -22,19 +22,20 @@ export function manejarModal(listaEventos) {
 
   cuerpoClase.addEventListener("click", (event) => {
     const tarjetaClicada = event.target.closest(".tarjeta-evento");
-
+    const eventosActualizados = JSON.parse(localStorage.getItem("eventosCR")); //prueba para ver si se actualiza constantemente el modal asi. Funciona asi!
     let eventoClick;
     if (tarjetaClicada) {
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
       const tipo = tarjetaClicada.dataset.tipo;
       const ubicacionTarjeta = tarjetaClicada.dataset.ubicacion;
+
       if (tipo === "clase") {
-        eventoClick = listaEventos.find(
+        eventoClick = eventosActualizados.find(
           (evento) =>
             evento.dia === dia &&
             evento.hora === hora &&
-            evento.nivel != null &&
+            evento.profesor !== null &&
             ubicacionTarjeta === evento.ubicacion
         );
 
@@ -69,7 +70,7 @@ export function manejarModal(listaEventos) {
           (evento) =>
             evento.dia === dia &&
             evento.hora === hora &&
-            evento.nivel == null &&
+            evento.nivel != null &&
             ubicacionTarjeta === evento.ubicacion
         );
 
