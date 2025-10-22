@@ -2,7 +2,7 @@ import { cargarEventos } from "../main";
 
 const STORAGE = "eventosCR";
 let listaEventos = cargarEventos(STORAGE);
-
+const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
 let tarjetaDrag = null; // Tarjeta que se está arrastrando
 
 const inicioDrag = (listaEventos) => {
@@ -65,7 +65,7 @@ const manejoDropActividad = (e) => {
     );
   }
 
-  if (!claseOcupada) {
+  if (!claseOcupada && !celdaDestino.classList.contains("hora_no_usable")) {
     tarjetaArrastrada.classList.remove("dragging");
     celdaDestino.appendChild(tarjetaArrastrada);
 
