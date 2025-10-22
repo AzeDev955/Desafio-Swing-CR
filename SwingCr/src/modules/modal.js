@@ -1,4 +1,8 @@
-export function manejarModal() {
+export function manejarModal(listaEventos) {
+  const tablaClases = document.getElementById("tabla-clases");
+  const tablaActividades = document.getElementById("tabla-actividades");
+  const cuerpoClase = tablaClases.querySelector("tbody");
+  const cuerpoActividades = tablaActividades.querySelector("tbody");
   const modal = document.getElementById("modal-detalles");
   const modalCerrarBtn = document.getElementById("modal-cerrar");
   const modalTitulo = document.getElementById("modal-titulo");

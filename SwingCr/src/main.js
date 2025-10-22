@@ -57,7 +57,7 @@ const listaEventos = cargarEventos();
 if (tablaClases) {
   iniciarTablas(horasClase, horasActividades, dias);
   cargarTarjetas(listaEventos, STORAGE);
-  manejarModal();
+  manejarModal(listaEventos);
   //Modal/////////////////////////////////////////////////////////////////////////
 
   //Drag n drop///////////////////////////////////////////////////////////////////
