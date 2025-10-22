@@ -299,3 +299,16 @@ header {
 .hora_no_usable {
   background-color: #d6b6b4;
 }
+
+.formulario__grupo input.invalido,
+.formulario__grupo select.invalido,
+.formulario__grupo textarea.invalido {
+  border-color: #d8000c;
+  background-color: #ffd2d2;
+}
+
+.formulario__grupo input.valido,
+.formulario__grupo select.valido,
+.formulario__grupo textarea.valido {
+  border-color: #4caf50;
+}
