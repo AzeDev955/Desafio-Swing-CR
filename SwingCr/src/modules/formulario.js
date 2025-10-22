@@ -130,7 +130,7 @@ export function inicioFormulario(
     const ubicacionOption = document.querySelector(
       "input[name='ubicacion']:checked"
     );
-    let ubicacion = "";
+    let ubicacion;
     if (ubicacionOption) {
       ubicacion = ubicacionOption.value;
     }
@@ -138,6 +138,11 @@ export function inicioFormulario(
 
     let evento;
     let formularioCorrecto = true;
+    if (!ubicacion) {
+      let ubicacionDiv = document.getElementById("ubicaciones-clases");
+      mostrarErrorCampo(ubicacionDiv, "Debes seleccionar una ubicacion");
+      formularioCorrecto = false;
+    }
     switch (actividad) {
       case "Clase":
         const estiloOption = document.getElementById("clase-estilo");
@@ -171,6 +176,7 @@ export function inicioFormulario(
           );
           formularioCorrecto = false;
         }
+
         if (formularioCorrecto) {
           evento = new Clase(dia, hora, ubicacion, estilo, nivel, profesor);
         }
@@ -180,10 +186,33 @@ export function inicioFormulario(
         const tipoOption = document.getElementById("actividad-tipo");
         const tipo = tipoOption.value;
 
-        let banda = "";
+        if (dia === "Viernes") {
+          if (!horasActividadesViernes.includes(hora)) {
+            mostrarErrorCampo(horaOption, "Los viernes empezamos a las 20:00");
+            formularioCorrecto = false;
+          }
+        }
+        if (dia === "Domingo") {
+          if (!horasActividadesDomingo.includes(hora)) {
+            mostrarErrorCampo(
+              horaOption,
+              "Los domingos terminamos a las 20:00"
+            );
+            formularioCorrecto = false;
+          }
+        }
+
+        let banda;
         if (tipo === "Concierto") {
           const bandaInput = document.getElementById("actividad-banda");
           banda = bandaInput.value;
+          if (banda.length < 3) {
+            mostrarErrorCampo(
+              bandaInput,
+              "El nombre de la banda debe contener mas de tres letras"
+            );
+            formularioCorrecto = false;
+          }
         }
 
         const descripcionInput = document.getElementById(
