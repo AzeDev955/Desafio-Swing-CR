@@ -157,7 +157,10 @@ function manejoDropClase(e) {
       evento.ubicacion === ubicacionARevisar
   );
 
-  if (!eventoEnUbicacion) {
+  if (
+    !eventoEnUbicacion &&
+    !celdaDestino.classList.contains("hora_no_usable")
+  ) {
     tarjetaArrastrada.classList.remove("dragging");
     celdaDestino.appendChild(tarjetaArrastrada);
 
