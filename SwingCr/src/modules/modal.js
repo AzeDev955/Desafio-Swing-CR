@@ -20,7 +20,10 @@ export function manejarModal() {
   const modalDetallesActividad = document.getElementById(
     "modal-detalles-actividad"
   );
+  const modalBorrarBtn = document.getElementById("modal-borrar-btn");
+
   const eventosActualizados = JSON.parse(localStorage.getItem("eventosCR")); //prueba para ver si se actualiza constantemente el modal asi. Funciona asi!
+
   cuerpoClase.addEventListener("click", (event) => {
     const tarjetaClicada = event.target.closest(".tarjeta-evento");
     let eventoClick;
@@ -102,4 +105,6 @@ export function manejarModal() {
   modalCerrarBtn.addEventListener("click", () => {
     modal.classList.add("oculto");
   });
+
+  modalBorrarBtn.addEventListener("click", () => {});
 }

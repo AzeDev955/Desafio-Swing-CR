@@ -312,3 +312,20 @@ header {
 .formulario__grupo textarea.valido {
   border-color: #4caf50;
 }
+
+.btn-borrado {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+.btn-borrado:hover {
+  background-color: #c82333; /* Darker red on hover */
+  transform: translateY(-2px);
+}
+
+.modal-acciones {
+  margin-top: 24px; /* Space above the button(s) */
+  padding-top: 16px; /* Space above the button(s) */
+  border-top: 1px solid #eee; /* Separator line */
+  text-align: right; /* Align button(s) to the right */
+}
