@@ -120,6 +120,7 @@ export function cargarTarjetas(listaEventos) {
       tarjeta.dataset.hora = clase.hora;
       tarjeta.dataset.tipoEvento = "clase";
       tarjeta.dataset.ubicacion = clase.ubicacion;
+      tarjeta.dataset.id = clase.id;
 
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);
@@ -165,6 +166,7 @@ export function cargarTarjetas(listaEventos) {
       tarjeta.dataset.hora = actividad.hora;
       tarjeta.dataset.tipoEvento = "actividad";
       tarjeta.dataset.ubicacion = actividad.ubicacion;
+      tarjeta.dataset.id = actividad.id;
 
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);

@@ -31,6 +31,7 @@ export function manejarModal() {
     const tarjetaClicada = event.target.closest(".tarjeta-evento");
     let eventoClick;
     if (tarjetaClicada) {
+      const eventoId = parseInt(tarjetaClicada.dataset.id);
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
       const tipo = tarjetaClicada.dataset.tipoEvento;
@@ -59,6 +60,7 @@ export function manejarModal() {
           modalDetallesActividad.style.display = "none";
 
           modal.classList.remove("oculto");
+          modal.dataset.id = eventoId;
           modal.dataset.dia = eventoClick.dia;
           modal.dataset.hora = eventoClick.hora;
           modal.dataset.ubicacion = eventoClick.ubicacion;
@@ -71,6 +73,7 @@ export function manejarModal() {
   cuerpoActividades.addEventListener("click", (event) => {
     const tarjetaClicada = event.target.closest(".tarjeta-evento");
     if (tarjetaClicada) {
+      const eventoId = parseInt(tarjetaClicada.dataset.id);
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
       const tipo = tarjetaClicada.dataset.tipoEvento;
@@ -85,6 +88,7 @@ export function manejarModal() {
         );
 
         if (eventoClick) {
+          modal.dataset.id = eventoId;
           modalDia.textContent = eventoClick.dia;
           modalHora.textContent = eventoClick.hora;
           modalUbicacion.textContent = eventoClick.ubicacion;
@@ -120,7 +124,7 @@ export function manejarModal() {
   });
 
   modalBorrarBtn.addEventListener("click", () => {
-    const diaToDelete = modal.dataset.dia;
+    /*const diaToDelete = modal.dataset.dia;
     const horaToDelete = modal.dataset.hora;
     const ubicacionToDelete = modal.dataset.ubicacion;
     const estiloToDelete = modal.dataset.estilo ? modal.dataset.estilo : null;
@@ -128,39 +132,25 @@ export function manejarModal() {
       ? modal.dataset.tipoEvento
       : null;
     const bandaToDelete = modal.dataset.banda ? modal.dataset.banda : null;
-
+*/
+    const idToDelete = parseInt(modal.dataset.id);
     let listaEventosActualizada = cargarEventos(STORAGE);
 
-    const eventoIndex = listaEventosActualizada.find((evento) => {
-      let eventoEncontrado;
-      if (estiloToDelete) {
-        eventoEncontrado =
-          evento.dia === diaToDelete &&
-          evento.hora === horaToDelete &&
-          ubicacionToDelete &&
-          estiloToDelete === evento.estilo;
-      } else {
-        if (bandaToDelete) {
-          eventoEncontrado =
-            evento.dia === diaToDelete &&
-            evento.hora === horaToDelete &&
-            ubicacionToDelete &&
-            evento.tipo === tipoEventoToDelete &&
-            evento.banda === bandaToDelete;
-        } else {
-          eventoEncontrado =
-            evento.dia === diaToDelete &&
-            evento.hora === horaToDelete &&
-            ubicacionToDelete &&
-            evento.tipo === tipoEventoToDelete;
-        }
-      }
-      return eventoEncontrado;
-    });
+    const eventoIndex = listaEventosActualizada.findIndex(
+      (evento) => evento.id === idToDelete
+    );
+
     if (eventoIndex !== -1) {
       listaEventosActualizada.splice(eventoIndex, 1);
       localStorage.setItem(STORAGE, JSON.stringify(listaEventosActualizada));
-      window.location.reload();
+      modal.classList.add("oculto");
+      const tarjetaParaBorrar = document.querySelector(
+        `.tarjeta-evento[data-id='${idToDelete}']`
+      );
+      if (tarjetaParaBorrar) {
+        tarjetaParaBorrar.remove();
+        console.log("Tarjeta borrada del DOM.");
+      }
     }
   });
 }

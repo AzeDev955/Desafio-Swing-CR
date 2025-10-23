@@ -232,6 +232,9 @@ export function inicioFormulario(
 
         break;
     }
+    if (evento) {
+      evento.id = Date.now();
+    }
     if (formularioCorrecto) {
       resetFormulario(formulario);
       listaEventos.push(evento);
