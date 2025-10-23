@@ -88,7 +88,7 @@ export function manejarModal() {
           modalDia.textContent = eventoClick.dia;
           modalHora.textContent = eventoClick.hora;
           modalUbicacion.textContent = eventoClick.ubicacion;
-          modalTitulo.textContent = `Detalles de la Actividad: ${eventoClick.tipoEvento}`;
+          modalTitulo.textContent = `Detalles de la Actividad: ${eventoClick.tipo}`;
 
           modalTipo.textContent = eventoClick.tipo;
           if (eventoClick.tipo === "Concierto") {
