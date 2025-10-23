@@ -46,6 +46,7 @@ export function inicioFormulario(
   );
   const seleccionBanda = document.getElementById("actividad-tipo");
   const campoBanda = document.getElementById("grupo-banda");
+  const btnSecundario = document.getElementById("btn-reset");
 
   diaSelect.addEventListener("change", () => {
     resetUbicaciones();
@@ -230,32 +231,52 @@ export function inicioFormulario(
         break;
     }
     if (formularioCorrecto) {
-      resetFormulario(
-        formulario,
-        campoActividades,
-        campoClase,
-        campoUbicacionesActividades,
-        campoUbicacionesClases
-      );
+      resetFormulario(formulario);
       listaEventos.push(evento);
       const eventosJSON = JSON.stringify(listaEventos);
       localStorage.setItem(STORAGE, eventosJSON);
     }
   });
+
+  btnSecundario.addEventListener("click", () => {
+    resetFormulario(formulario);
+  });
 }
 
-const resetFormulario = (
-  formulario,
-  campoActividades,
-  campoClase,
-  campoUbicacionesActividades,
-  campoUbicacionesClases
-) => {
-  formulario.reset();
-  campoClase.classList.add("oculto");
-  campoActividades.classList.add("oculto");
-  campoUbicacionesClases.classList.add("oculto");
-  campoUbicacionesActividades.classList.add("oculto");
+const resetFormulario = (formulario) => {
+  if (formulario) {
+    formulario.reset();
+  } else {
+    return;
+  }
+  const campoClase = document.getElementById("campos-clase");
+  const campoActividades = document.getElementById("campos-actividad");
+  const campoUbicacionesClases = document.getElementById("ubicaciones-clases");
+  const campoUbicacionesActividades = document.getElementById(
+    "ubicaciones-actividades"
+  );
+  const campoBanda = document.getElementById("grupo-banda");
+
+  if (campoClase) {
+    campoClase.classList.add("oculto");
+  }
+
+  if (campoActividades) {
+    campoActividades.classList.add("oculto");
+  }
+
+  if (campoUbicacionesClases) {
+    campoUbicacionesClases.classList.add("oculto");
+  }
+
+  if (campoUbicacionesActividades) {
+    campoUbicacionesActividades.classList.add("oculto");
+  }
+
+  if (campoBanda) {
+    campoBanda.classList.add("oculto");
+  }
+
   const mensajesError = formulario.querySelectorAll(".error-mensaje");
   mensajesError.forEach((mensaje) => {
     mensaje.textContent = "";
