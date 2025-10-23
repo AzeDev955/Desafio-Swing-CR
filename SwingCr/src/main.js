@@ -52,7 +52,7 @@ let horasActividades = [
   "23:00",
   "00:00",
 ];
-export const STORAGE = "eventosCR";
+const STORAGE = "eventosCR";
 
 const formulario = document.getElementById("formulario-registro");
 const tablaClases = document.getElementById("tabla-clases");

@@ -1,5 +1,5 @@
 import { cargarEventos } from "../main";
-import { STORAGE } from "../main";
+const STORAGE = "eventosCR";
 
 export function manejarModal() {
   const tablaClases = document.getElementById("tabla-clases");
@@ -160,6 +160,7 @@ export function manejarModal() {
     if (eventoIndex !== -1) {
       listaEventosActualizada.splice(eventoIndex, 1);
       localStorage.setItem(STORAGE, JSON.stringify(listaEventosActualizada));
+      window.location.reload();
     }
   });
 }

@@ -124,7 +124,6 @@ export function inicioFormulario(
     event.preventDefault();
     const horaOption = document.getElementById("hora");
     const hora = horaOption.value;
-
     const diaOption = document.getElementById("dia");
     const dia = diaOption.value;
 
@@ -162,7 +161,10 @@ export function inicioFormulario(
         }
         if (dia === "Viernes") {
           if (!horasClaseViernes.includes(hora)) {
-            mostrarErrorCampo(horaOption, "Los viernes empezamos a las 20:00");
+            mostrarErrorCampo(
+              horaOption,
+              "Los viernes solo hay clases a las 20:00"
+            );
             formularioCorrecto = false;
           }
         }
