@@ -1,6 +1,5 @@
 import { cargarEventos } from "../main";
-
-const STORAGE = "eventosCR";
+import { STORAGE } from "../main";
 let listaEventos = cargarEventos(STORAGE);
 const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
 let tarjetaDrag = null; // Tarjeta que se está arrastrando

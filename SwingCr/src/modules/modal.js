@@ -1,3 +1,6 @@
+import { cargarEventos } from "../main";
+import { STORAGE } from "../main";
+
 export function manejarModal() {
   const tablaClases = document.getElementById("tabla-clases");
   const tablaActividades = document.getElementById("tabla-actividades");
@@ -56,6 +59,10 @@ export function manejarModal() {
           modalDetallesActividad.style.display = "none";
 
           modal.classList.remove("oculto");
+          modal.dataset.dia = eventoClick.dia;
+          modal.dataset.hora = eventoClick.hora;
+          modal.dataset.ubicacion = eventoClick.ubicacion;
+          modal.dataset.estilo = eventoClick.estilo;
         }
       }
     }
@@ -87,6 +94,7 @@ export function manejarModal() {
           if (eventoClick.tipo === "Concierto") {
             modalBanda.textContent = eventoClick.banda; // Fill the band name
             modalBandaParrafo.style.display = "block"; // Show the paragraph
+            modal.dataset.banda = eventoClick.banda;
           } else {
             modalBandaParrafo.style.display = "none";
           }
@@ -97,6 +105,11 @@ export function manejarModal() {
           modalDetallesActividad.style.display = "block";
 
           modal.classList.remove("oculto");
+
+          modal.dataset.dia = eventoClick.dia;
+          modal.dataset.hora = eventoClick.hora;
+          modal.dataset.ubicacion = eventoClick.ubicacion;
+          modal.dataset.tipoEvento = eventoClick.tipo;
         }
       }
     }
@@ -106,5 +119,47 @@ export function manejarModal() {
     modal.classList.add("oculto");
   });
 
-  modalBorrarBtn.addEventListener("click", () => {});
+  modalBorrarBtn.addEventListener("click", () => {
+    const diaToDelete = modal.dataset.dia;
+    const horaToDelete = modal.dataset.hora;
+    const ubicacionToDelete = modal.dataset.ubicacion;
+    const estiloToDelete = modal.dataset.estilo ? modal.dataset.estilo : null;
+    const tipoEventoToDelete = modal.dataset.tipoEvento
+      ? modal.dataset.tipoEvento
+      : null;
+    const bandaToDelete = modal.dataset.banda ? modal.dataset.banda : null;
+
+    let listaEventosActualizada = cargarEventos(STORAGE);
+
+    const eventoIndex = listaEventosActualizada.find((evento) => {
+      let eventoEncontrado;
+      if (estiloToDelete) {
+        eventoEncontrado =
+          evento.dia === diaToDelete &&
+          evento.hora === horaToDelete &&
+          ubicacionToDelete &&
+          estiloToDelete === evento.estilo;
+      } else {
+        if (bandaToDelete) {
+          eventoEncontrado =
+            evento.dia === diaToDelete &&
+            evento.hora === horaToDelete &&
+            ubicacionToDelete &&
+            evento.tipo === tipoEventoToDelete &&
+            evento.banda === bandaToDelete;
+        } else {
+          eventoEncontrado =
+            evento.dia === diaToDelete &&
+            evento.hora === horaToDelete &&
+            ubicacionToDelete &&
+            evento.tipo === tipoEventoToDelete;
+        }
+      }
+      return eventoEncontrado;
+    });
+    if (eventoIndex !== -1) {
+      listaEventosActualizada.splice(eventoIndex, 1);
+      localStorage.setItem(STORAGE, JSON.stringify(listaEventosActualizada));
+    }
+  });
 }
