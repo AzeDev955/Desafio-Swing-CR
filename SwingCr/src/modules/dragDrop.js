@@ -78,8 +78,6 @@ const manejoDropActividad = (e) => {
       newDia,
       newHora
     );
-
-    inicioDrag(listaEventos);
   } else {
     return;
   }
@@ -173,8 +171,6 @@ function manejoDropClase(e) {
       newDia,
       newHora
     );
-
-    inicioDrag(listaEventos);
   } else {
     return;
   }
