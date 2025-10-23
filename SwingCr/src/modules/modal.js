@@ -14,20 +14,20 @@ export function manejarModal() {
   const modalProfesor = document.getElementById("modal-profesor");
   const modalTipo = document.getElementById("modal-tipo");
   const modalBanda = document.getElementById("modal-banda");
+  const modalBandaParrafo = document.getElementById("modal-banda-p");
   const modalDescripcion = document.getElementById("modal-descripcion");
   const modalDetallesClase = document.getElementById("modal-detalles-clase");
   const modalDetallesActividad = document.getElementById(
     "modal-detalles-actividad"
   );
-
+  const eventosActualizados = JSON.parse(localStorage.getItem("eventosCR")); //prueba para ver si se actualiza constantemente el modal asi. Funciona asi!
   cuerpoClase.addEventListener("click", (event) => {
     const tarjetaClicada = event.target.closest(".tarjeta-evento");
-    const eventosActualizados = JSON.parse(localStorage.getItem("eventosCR")); //prueba para ver si se actualiza constantemente el modal asi. Funciona asi!
     let eventoClick;
     if (tarjetaClicada) {
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
-      const tipo = tarjetaClicada.dataset.tipo;
+      const tipo = tarjetaClicada.dataset.tipoEvento;
       const ubicacionTarjeta = tarjetaClicada.dataset.ubicacion;
 
       if (tipo === "clase") {
@@ -63,14 +63,14 @@ export function manejarModal() {
     if (tarjetaClicada) {
       const dia = tarjetaClicada.dataset.dia;
       const hora = tarjetaClicada.dataset.hora;
-      const tipo = tarjetaClicada.dataset.tipo;
+      const tipo = tarjetaClicada.dataset.tipoEvento;
       const ubicacionTarjeta = tarjetaClicada.dataset.ubicacion;
       if (tipo === "actividad") {
-        const eventoClick = listaEventos.find(
+        const eventoClick = eventosActualizados.find(
           (evento) =>
             evento.dia === dia &&
             evento.hora === hora &&
-            evento.nivel != null &&
+            evento.tipo !== null &&
             ubicacionTarjeta === evento.ubicacion
         );
 
@@ -78,10 +78,16 @@ export function manejarModal() {
           modalDia.textContent = eventoClick.dia;
           modalHora.textContent = eventoClick.hora;
           modalUbicacion.textContent = eventoClick.ubicacion;
-          modalTitulo.textContent = `Detalles de la Actividad: ${eventoClick.tipo}`;
+          modalTitulo.textContent = `Detalles de la Actividad: ${eventoClick.tipoEvento}`;
 
           modalTipo.textContent = eventoClick.tipo;
-          modalBanda.textContent = eventoClick.banda;
+          if (eventoClick.tipo === "Concierto") {
+            modalBanda.textContent = eventoClick.banda; // Fill the band name
+            modalBandaParrafo.style.display = "block"; // Show the paragraph
+          } else {
+            modalBandaParrafo.style.display = "none";
+          }
+
           modalDescripcion.textContent = eventoClick.descripcion;
 
           modalDetallesClase.style.display = "none";

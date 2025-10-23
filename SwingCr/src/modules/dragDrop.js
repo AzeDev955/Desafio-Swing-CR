@@ -116,7 +116,7 @@ const actualizarEventoEnLista = (
 };
 const manejoDragstart = (e) => {
   tarjetaDrag = e.currentTarget;
-  e.dataTransfer.setData("text/plain", tarjetaDrag.dataset.tipo);
+  e.dataTransfer.setData("text/plain", tarjetaDrag.dataset.tipoEvento);
   tarjetaDrag.classList.add("dragging");
 };
 

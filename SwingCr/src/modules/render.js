@@ -118,7 +118,7 @@ export function cargarTarjetas(listaEventos) {
       //Datasets para encontrar el div
       tarjeta.dataset.dia = clase.dia;
       tarjeta.dataset.hora = clase.hora;
-      tarjeta.dataset.tipo = "clase";
+      tarjeta.dataset.tipoEvento = "clase";
       tarjeta.dataset.ubicacion = clase.ubicacion;
 
       tarjeta.appendChild(tituloTarjeta);
@@ -167,7 +167,7 @@ export function cargarTarjetas(listaEventos) {
 
       tarjeta.dataset.dia = actividad.dia;
       tarjeta.dataset.hora = actividad.hora;
-      tarjeta.dataset.tipo = "actividad";
+      tarjeta.dataset.tipoEvento = "actividad";
       tarjeta.dataset.ubicacion = actividad.ubicacion;
 
       tarjeta.appendChild(tituloTarjeta);
