@@ -161,10 +161,6 @@ export function cargarTarjetas(listaEventos) {
       ubicacionTarjeta.classList.add("tarjeta-evento__ubicacion");
       ubicacionTarjeta.textContent = `Ubicación: ${actividad.ubicacion}`;
 
-      let bandaTarjeta = document.createElement("div");
-      bandaTarjeta.classList.add("tarjeta-evento__banda");
-      bandaTarjeta.textContent = `Banda: ${actividad.banda}`;
-
       tarjeta.dataset.dia = actividad.dia;
       tarjeta.dataset.hora = actividad.hora;
       tarjeta.dataset.tipoEvento = "actividad";
@@ -172,7 +168,13 @@ export function cargarTarjetas(listaEventos) {
 
       tarjeta.appendChild(tituloTarjeta);
       tarjeta.appendChild(ubicacionTarjeta);
-      tarjeta.appendChild(bandaTarjeta);
+
+      if (actividad.tipo === "Concierto") {
+        let bandaTarjeta = document.createElement("div");
+        bandaTarjeta.classList.add("tarjeta-evento__banda");
+        bandaTarjeta.textContent = `Banda: ${actividad.banda}`;
+        tarjeta.appendChild(bandaTarjeta);
+      }
 
       tarjeta.setAttribute("draggable", "true");
       const celdaUbicacion = celdas[columna];
