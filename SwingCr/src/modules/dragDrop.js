@@ -117,8 +117,8 @@ const manejoDragEnd = (e) => {
     console.log("Clase 'dragging' eliminada en dragend");
   }
   tarjetaDrag = null;
-  let tarjetas = document.querySelectorAll(".drag_no_usable");
-  tarjetas.forEach((tarjeta) => {
+  let celdas = document.querySelectorAll(".drag_no_usable");
+  celdas.forEach((celda) => {
     tarjeta.classList.remove("drag_no_usable");
   });
 };
