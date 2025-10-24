@@ -3,6 +3,8 @@ const STORAGE = "eventosCR";
 let listaEventos = cargarEventos(STORAGE);
 const salasClase = ["Be Hopper", "New Orleans", "Savoy"];
 let tarjetaDrag = null; // Tarjeta que se está arrastrando
+let scrollIntervalId = null; // <= Variable para el ID del intervalo
+let currentMouseY = 0; // <= Variable para guardar la posición Y del ratón
 
 const inicioDrag = (listaEventos) => {
   const tarjetas = document.querySelectorAll(".tarjeta-evento");
@@ -115,10 +117,25 @@ const manejoDragstart = (e) => {
   tarjetaDrag = e.currentTarget;
   e.dataTransfer.setData("text/plain", tarjetaDrag.dataset.tipoEvento);
   tarjetaDrag.classList.add("dragging");
+
+  if (scrollIntervalId) clearInterval(scrollIntervalId);
+  scrollIntervalId = setInterval(() => {
+    const windowHeight = window.innerHeight;
+    const scrollStep = 20;
+    const edgeThreshold = 80;
+
+    if (currentMouseY > windowHeight - edgeThreshold) {
+      window.scrollBy(0, scrollStep);
+    }
+    if (currentMouseY < edgeThreshold) {
+      window.scrollBy(0, -scrollStep);
+    }
+  }, 50);
 };
 
 const manejoDragOver = (e) => {
   e.preventDefault();
+  currentMouseY = e.clientY;
 };
 
 const manejoDragEnter = (e) => {
