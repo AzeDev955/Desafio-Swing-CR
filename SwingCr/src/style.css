@@ -67,9 +67,14 @@ header {
   border-collapse: collapse;
   min-width: 600px;
 }
-
+.tabla-programa tbody th {
+  text-align: center;
+  vertical-align: middle;
+}
 .tabla-programa th,
 .tabla-programa td {
+  height: 90px;
+  max-height: fit-content;
   border: 1px solid #ddcdbe;
   padding: 8px;
   vertical-align: top;
@@ -81,6 +86,8 @@ header {
   color: #ffffff;
   font-family: "Playfair Display", serif;
   font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .tabla-programa tbody th {
@@ -94,6 +101,8 @@ header {
 }
 
 .tarjeta-evento {
+  height: fit-content;
+  max-height: fit-content;
   background-color: #ffffff;
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -274,6 +283,8 @@ header {
 
 .dragging {
   cursor: grabbing;
+  opacity: 0.5; /* Hacerla semi-transparente */
+  border: 2px dashed #800020; /* Borde punteado burdeos */
 }
 /*drag and drop estilos */
 
@@ -287,4 +298,49 @@ header {
   box-shadow: 0 6px 20px rgba(128, 0, 32, 0.15);
 }
 
-/*Responsive */
+td.drag_over {
+  background-color: #f0e6d2; /* Un color de fondo sutil para resaltar */
+  outline: 2px dashed #ffd700; /* Borde dorado punteado */
+  outline-offset: -2px; /* Para que el borde esté dentro */
+}
+
+.hora_no_usable {
+  background-color: #e9ebf0;
+}
+
+.drag_no_usable {
+  outline: 2px dashed #dc3545; /* Dashed red outline (danger color) */
+  outline-offset: -2px; /* Puts outline just inside the cell border */
+  cursor: not-allowed; /* "Forbidden" cursor */
+  background-color: #fff0f1;
+}
+
+.formulario__grupo input.invalido,
+.formulario__grupo select.invalido,
+.formulario__grupo textarea.invalido {
+  border-color: #d8000c;
+  background-color: #ffd2d2;
+}
+
+.formulario__grupo input.valido,
+.formulario__grupo select.valido,
+.formulario__grupo textarea.valido {
+  border-color: #4caf50;
+}
+
+.btn-borrado {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+.btn-borrado:hover {
+  background-color: #c82333; /* Darker red on hover */
+  transform: translateY(-2px);
+}
+
+.modal-acciones {
+  margin-top: 24px; /* Space above the button(s) */
+  padding-top: 16px; /* Space above the button(s) */
+  border-top: 1px solid #eee; /* Separator line */
+  text-align: right; /* Align button(s) to the right */
+}

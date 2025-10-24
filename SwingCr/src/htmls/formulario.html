@@ -44,7 +44,7 @@
               <option value="18:00">18:00</option>
               <option value="19:00">19:00</option>
               <option value="20:00">20:00</option>
-              <option value="24:00">00:00</option>
+              <option value="00:00">00:00</option>
             </select>
           </div>
         </fieldset>
@@ -92,7 +92,7 @@
           <div id="campos-actividad" class="campos-dinamicos oculto">
             <div class="formulario__grupo">
               <label for="actividad-tipo">Tipo de actividad:</label>
-              <select id="actividad-tipo" name="actividad-tipo">
+              <select id="actividad-tipo" name="actividad-tipo" required>
                 <option value="Taster">Taster</option>
                 <option value="Social">Social</option>
                 <option value="Concierto">Concierto</option>
@@ -155,7 +155,7 @@
         </fieldset>
           <div class="formulario__acciones">
           <button type="submit" class="btn btn-primary">Guardar Evento</button>
-          <a href="/" class="btn btn-secondary">Cancelar</a>
+          <button type="reset" class="btn btn-secundario" id="btn-reset">Cancelar</a>
         </div>
       </form>
     </main>
