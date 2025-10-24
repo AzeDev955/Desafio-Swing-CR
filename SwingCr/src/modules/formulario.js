@@ -248,10 +248,13 @@ export function inicioFormulario(
       evento.id = Date.now();
     }
     if (formularioCorrecto) {
-      //resetFormulario(formulario);
       listaEventos.push(evento);
       const eventosJSON = JSON.stringify(listaEventos);
       localStorage.setItem(STORAGE, eventosJSON);
+      const ubicacionSeleccionada = document.querySelector(
+        "input[name='ubicacion']:checked"
+      );
+      ubicacionSeleccionada.checked = false;
       marcarSalasOcupadas(
         diaSelect,
         horaSelect,
