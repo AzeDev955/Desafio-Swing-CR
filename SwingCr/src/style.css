@@ -298,7 +298,7 @@ header {
   box-shadow: 0 6px 20px rgba(128, 0, 32, 0.15);
 }
 
-td.drag-over {
+td.drag_over {
   background-color: #f0e6d2; /* Un color de fondo sutil para resaltar */
   outline: 2px dashed #ffd700; /* Borde dorado punteado */
   outline-offset: -2px; /* Para que el borde esté dentro */

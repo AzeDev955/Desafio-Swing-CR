@@ -95,14 +95,14 @@ const manejoDragEnter = (e) => {
   e.preventDefault();
   const celda = e.currentTarget;
   if (!celda.classList.contains("hora_no_usable")) {
-    celda.classList.add("drag-over");
+    celda.classList.add("drag_over");
   } else {
     celda.classList.add("drag_no_usable");
   }
 };
 const manejoDragLeave = (e) => {
   const celda = e.currentTarget;
-  celda.classList.remove("drag-over");
+  celda.classList.remove("drag_over");
   celda.classList.remove("drag_no_usable");
 };
 
@@ -114,12 +114,15 @@ const manejoDragEnd = (e) => {
 
   if (tarjetaDrag) {
     tarjetaDrag.classList.remove("dragging");
-    console.log("Clase 'dragging' eliminada en dragend");
   }
   tarjetaDrag = null;
-  let celdas = document.querySelectorAll(".drag_no_usable");
-  celdas.forEach((celda) => {
-    tarjeta.classList.remove("drag_no_usable");
+  let celdasNoUsables = document.querySelectorAll(".drag_no_usable");
+  let celdasDragOver = document.querySelectorAll(".drag_over");
+  celdasNoUsables.forEach((celda) => {
+    celda.classList.remove("drag_no_usable");
+  });
+  celdasDragOver.forEach((celda) => {
+    celda.classList.remove("drag_over");
   });
 };
 
@@ -157,7 +160,7 @@ function manejoDropClase(e) {
 
     tarjetaArrastrada.dataset.dia = newDia;
     tarjetaArrastrada.dataset.hora = newHora;
-    celdaDestino.classList.remove("drag-over");
+    celdaDestino.classList.remove("drag_over");
     celdaDestino.classList.remove("drag_no_usable");
 
     actualizarEventoEnLista(
@@ -206,7 +209,7 @@ const manejoDropActividad = (e) => {
 
     tarjetaArrastrada.dataset.dia = newDia;
     tarjetaArrastrada.dataset.hora = newHora;
-    celdaDestino.classList.remove("drag-over");
+    celdaDestino.classList.remove("drag_over");
     celdaDestino.classList.remove("drag_no_usable");
     actualizarEventoEnLista(
       oldDia,
