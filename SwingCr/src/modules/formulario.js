@@ -231,6 +231,12 @@ export function inicioFormulario(
           "actividad-descripcion"
         );
         const descripcion = descripcionInput.value;
+        if (descripcion.length < 10) {
+          mostrarErrorCampo(descripcionInput, "Debes describir el evento");
+          formularioCorrecto = false;
+        } else {
+          mostrarErrorCampo(descripcionInput, "");
+        }
         if (formularioCorrecto) {
           evento = new Actividad(
             dia,
