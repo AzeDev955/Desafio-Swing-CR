@@ -283,6 +283,8 @@ header {
 
 .dragging {
   cursor: grabbing;
+  opacity: 0.5; /* Hacerla semi-transparente */
+  border: 2px dashed #800020; /* Borde punteado burdeos */
 }
 /*drag and drop estilos */
 
@@ -296,8 +298,21 @@ header {
   box-shadow: 0 6px 20px rgba(128, 0, 32, 0.15);
 }
 
+td.drag-over {
+  background-color: #f0e6d2; /* Un color de fondo sutil para resaltar */
+  outline: 2px dashed #ffd700; /* Borde dorado punteado */
+  outline-offset: -2px; /* Para que el borde esté dentro */
+}
+
 .hora_no_usable {
   background-color: #e9ebf0;
+}
+
+.drag_no_usable {
+  outline: 2px dashed #dc3545; /* Dashed red outline (danger color) */
+  outline-offset: -2px; /* Puts outline just inside the cell border */
+  cursor: not-allowed; /* "Forbidden" cursor */
+  background-color: #fff0f1;
 }
 
 .formulario__grupo input.invalido,

@@ -13,6 +13,7 @@ const inicioDrag = (listaEventos) => {
 
   tarjetas.forEach((tarjeta) => {
     tarjeta.addEventListener("dragstart", manejoDragstart);
+    tarjeta.addEventListener("dragend", manejoDragEnd);
   });
 
   celdasClase.forEach((celda) => {
@@ -35,54 +36,6 @@ const obtenerEventoTarjeta = (tarjeta, listaEventos) => {
   return listaEventos.find(
     (e) => e.dia === dia && e.hora === hora && e.ubicacion === ubicacion
   );
-};
-
-const manejoDropActividad = (e) => {
-  e.preventDefault();
-
-  const celdaDestino = e.currentTarget;
-  const tarjetaArrastrada = tarjetaDrag;
-
-  const tipo = e.dataTransfer.getData("text/plain");
-  if (tipo !== "actividad") {
-    return;
-  }
-
-  const newDia = celdaDestino.dataset.dia;
-  const newHora = celdaDestino.dataset.hora;
-  const oldDia = tarjetaArrastrada.dataset.dia;
-  const oldHora = tarjetaArrastrada.dataset.hora;
-  const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada, listaEventos);
-  const ubicacionARevisar = eventoTarjeta.ubicacion;
-
-  let claseOcupada = false;
-
-  if (salasClase.includes(ubicacionARevisar)) {
-    claseOcupada = listaEventos.some(
-      (evento) =>
-        evento.dia === newDia &&
-        evento.hora === newHora &&
-        evento.ubicacion === ubicacionARevisar
-    );
-  }
-
-  if (!claseOcupada && !celdaDestino.classList.contains("hora_no_usable")) {
-    tarjetaArrastrada.classList.remove("dragging");
-    celdaDestino.appendChild(tarjetaArrastrada);
-
-    tarjetaArrastrada.dataset.dia = newDia;
-    tarjetaArrastrada.dataset.hora = newHora;
-
-    actualizarEventoEnLista(
-      oldDia,
-      oldHora,
-      ubicacionARevisar,
-      newDia,
-      newHora
-    );
-  } else {
-    return;
-  }
 };
 
 const actualizarEventoEnLista = (
@@ -140,12 +93,36 @@ const manejoDragOver = (e) => {
 
 const manejoDragEnter = (e) => {
   e.preventDefault();
-};
-const manejoDragLeave = () => {
-  if (tarjetaDrag) {
-    tarjetaDrag.classList.remove("dragging");
+  const celda = e.currentTarget;
+  if (!celda.classList.contains("hora_no_usable")) {
+    celda.classList.add("drag-over");
+  } else {
+    celda.classList.add("drag_no_usable");
   }
 };
+const manejoDragLeave = (e) => {
+  const celda = e.currentTarget;
+  celda.classList.remove("drag-over");
+  celda.classList.remove("drag_no_usable");
+};
+
+const manejoDragEnd = (e) => {
+  if (scrollIntervalId) {
+    clearInterval(scrollIntervalId);
+    scrollIntervalId = null;
+  }
+
+  if (tarjetaDrag) {
+    tarjetaDrag.classList.remove("dragging");
+    console.log("Clase 'dragging' eliminada en dragend");
+  }
+  tarjetaDrag = null;
+  let tarjetas = document.querySelectorAll(".drag_no_usable");
+  tarjetas.forEach((tarjeta) => {
+    tarjeta.classList.remove("drag_no_usable");
+  });
+};
+
 function manejoDropClase(e) {
   e.preventDefault();
 
@@ -180,6 +157,8 @@ function manejoDropClase(e) {
 
     tarjetaArrastrada.dataset.dia = newDia;
     tarjetaArrastrada.dataset.hora = newHora;
+    celdaDestino.classList.remove("drag-over");
+    celdaDestino.classList.remove("drag_no_usable");
 
     actualizarEventoEnLista(
       oldDia,
@@ -192,6 +171,54 @@ function manejoDropClase(e) {
     return;
   }
 }
+const manejoDropActividad = (e) => {
+  e.preventDefault();
+
+  const celdaDestino = e.currentTarget;
+  const tarjetaArrastrada = tarjetaDrag;
+
+  const tipo = e.dataTransfer.getData("text/plain");
+  if (tipo !== "actividad") {
+    return;
+  }
+
+  const newDia = celdaDestino.dataset.dia;
+  const newHora = celdaDestino.dataset.hora;
+  const oldDia = tarjetaArrastrada.dataset.dia;
+  const oldHora = tarjetaArrastrada.dataset.hora;
+  const eventoTarjeta = obtenerEventoTarjeta(tarjetaArrastrada, listaEventos);
+  const ubicacionARevisar = eventoTarjeta.ubicacion;
+
+  let claseOcupada = false;
+
+  if (salasClase.includes(ubicacionARevisar)) {
+    claseOcupada = listaEventos.some(
+      (evento) =>
+        evento.dia === newDia &&
+        evento.hora === newHora &&
+        evento.ubicacion === ubicacionARevisar
+    );
+  }
+
+  if (!claseOcupada && !celdaDestino.classList.contains("hora_no_usable")) {
+    tarjetaArrastrada.classList.remove("dragging");
+    celdaDestino.appendChild(tarjetaArrastrada);
+
+    tarjetaArrastrada.dataset.dia = newDia;
+    tarjetaArrastrada.dataset.hora = newHora;
+    celdaDestino.classList.remove("drag-over");
+    celdaDestino.classList.remove("drag_no_usable");
+    actualizarEventoEnLista(
+      oldDia,
+      oldHora,
+      ubicacionARevisar,
+      newDia,
+      newHora
+    );
+  } else {
+    return;
+  }
+};
 
 export function manejarDragAndDrop(listaEventos) {
   inicioDrag(listaEventos);
