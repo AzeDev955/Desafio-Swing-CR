@@ -283,8 +283,8 @@ header {
 
 .dragging {
   cursor: grabbing;
-  opacity: 0.5;
-  border: 2px dashed #800020;
+  opacity: 0.5; /* Hacerla semi-transparente */
+  border: 2px dashed #800020; /* Borde punteado burdeos */
 }
 /*drag and drop estilos */
 
@@ -299,9 +299,9 @@ header {
 }
 
 td.drag_over {
-  background-color: #f0e6d2;
-  outline: 2px dashed #ffd700;
-  outline-offset: -2px;
+  background-color: #f0e6d2; /* Un color de fondo sutil para resaltar */
+  outline: 2px dashed #ffd700; /* Borde dorado punteado */
+  outline-offset: -2px; /* Para que el borde esté dentro */
 }
 
 .hora_no_usable {
@@ -309,9 +309,9 @@ td.drag_over {
 }
 
 .drag_no_usable {
-  outline: 2px dashed #dc3545;
-  outline-offset: -2px;
-  cursor: not-allowed;
+  outline: 2px dashed #dc3545; /* Dashed red outline (danger color) */
+  outline-offset: -2px; /* Puts outline just inside the cell border */
+  cursor: not-allowed; /* "Forbidden" cursor */
   background-color: #fff0f1;
 }
 
@@ -334,58 +334,13 @@ td.drag_over {
   border: none;
 }
 .btn-borrado:hover {
-  background-color: #c82333;
+  background-color: #c82333; /* Darker red on hover */
   transform: translateY(-2px);
 }
 
 .modal-acciones {
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid #eee;
-  text-align: right;
-}
-
-/* Responsive */
-
-@media (max-width: 768px) {
-  .contenedor {
-    padding: 16px;
-  }
-
-  header h1 {
-    font-size: 1.8rem;
-  }
-
-  .seccion-programa h2 {
-    font-size: 1.3rem;
-  }
-
-  .tabla-programa {
-    min-width: 0;
-    font-size: 0.9em;
-  }
-
-  .tabla-programa th,
-  .tabla-programa td {
-    padding: 6px;
-    height: auto;
-    min-height: 70px;
-  }
-
-  .tabla-programa tbody th {
-    width: 80px;
-  }
-
-  .tarjeta-evento {
-    padding: 8px;
-    font-size: 0.85em;
-  }
-  .tarjeta-evento__titulo {
-    font-size: 1em;
-  }
-  .tarjeta-evento__ubicacion,
-  .tarjeta-evento__nivel,
-  .tarjeta-evento__banda {
-    font-size: 0.9em;
-  }
+  margin-top: 24px; /* Space above the button(s) */
+  padding-top: 16px; /* Space above the button(s) */
+  border-top: 1px solid #eee; /* Separator line */
+  text-align: right; /* Align button(s) to the right */
 }
