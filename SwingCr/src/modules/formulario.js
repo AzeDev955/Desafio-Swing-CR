@@ -158,6 +158,8 @@ export function inicioFormulario(
             "Las clases solo pueden estar entre las 10:00 y las 20:00"
           );
           formularioCorrecto = false;
+        } else {
+          mostrarErrorCampo(horaOption, "");
         }
         if (dia === "Viernes") {
           if (!horasClaseViernes.includes(hora)) {
@@ -166,6 +168,8 @@ export function inicioFormulario(
               "Los viernes solo hay clases a las 20:00"
             );
             formularioCorrecto = false;
+          } else {
+            mostrarErrorCampo(horaOption, "");
           }
         }
 
@@ -175,6 +179,8 @@ export function inicioFormulario(
             "El nombre del profesor debe ser mayor de tres letras"
           );
           formularioCorrecto = false;
+        } else {
+          mostrarErrorCampo(profesorInput, "");
         }
 
         if (formularioCorrecto) {
@@ -190,6 +196,8 @@ export function inicioFormulario(
           if (!horasActividadesViernes.includes(hora)) {
             mostrarErrorCampo(horaOption, "Los viernes empezamos a las 20:00");
             formularioCorrecto = false;
+          } else {
+            mostrarErrorCampo(horaOption, "");
           }
         }
         if (dia === "Domingo") {
@@ -199,6 +207,8 @@ export function inicioFormulario(
               "Los domingos terminamos a las 20:00"
             );
             formularioCorrecto = false;
+          } else {
+            mostrarErrorCampo(horaOption, "");
           }
         }
 
@@ -212,6 +222,8 @@ export function inicioFormulario(
               "El nombre de la banda debe contener mas de tres letras"
             );
             formularioCorrecto = false;
+          } else {
+            mostrarErrorCampo(bandaInput, "");
           }
         }
 
@@ -236,10 +248,17 @@ export function inicioFormulario(
       evento.id = Date.now();
     }
     if (formularioCorrecto) {
-      resetFormulario(formulario);
+      //resetFormulario(formulario);
       listaEventos.push(evento);
       const eventosJSON = JSON.stringify(listaEventos);
       localStorage.setItem(STORAGE, eventosJSON);
+      marcarSalasOcupadas(
+        diaSelect,
+        horaSelect,
+        seleccionActividad,
+        salasClase,
+        listaEventos
+      );
     }
   });
 
@@ -317,7 +336,7 @@ const marcarSalasOcupadas = (
   const diaSeleccionado = diaSelect.value;
   const horaSeleccionada = horaSelect.value;
 
-  if (diaSeleccionado && horaSeleccionada && seleccionActividad) {
+  if (diaSeleccionado && horaSeleccionada && seleccionActividad.value) {
     let arrayDiaHora = [];
     listaEventos.forEach((evento) => {
       let diaHoraUbicacion = [evento.dia, evento.hora, evento.ubicacion];
